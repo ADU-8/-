@@ -9,7 +9,6 @@
     "pages/admin/admin",
     "pages/alluserinfo/alluserinfo",
     "pages/deleteequip/deleteequip",
-    "pages/test/test",
     "pages/updatelog/updatelog"
   ],
   "window": {

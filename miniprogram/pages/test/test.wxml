@@ -1,3 +1,0 @@
-<!--miniprogram/pages/test/test.wxml-->
-<text>miniprogram/pages/test/test.wxml</text>
-<button bindtap="send">fasong</button>
