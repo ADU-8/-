@@ -1,0 +1,152 @@
+/* miniprogram/pages/login/collegestudents/collegestudents.wxss */
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+page {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  height: 100%;
+}
+.jz{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.tab {
+  display: flex;
+}
+
+.tab-item {
+  flex: 1;
+  font-size: 10pt;
+  text-align: center;
+  line-height: 72rpx;
+  border-bottom: 6rpx solid #000;
+}
+
+.equip {
+  margin-left: 145rpx;
+  margin-bottom: 10rpx;
+}
+
+.content {
+  flex: 1;
+}
+
+.content > swiper {
+  height: 100%;
+}
+
+.tab-item.active {
+  color: #5927bd;
+  border-bottom-color: #480bff;
+}
+
+.content {
+  margin-top: 50rpx;
+  margin-bottom: 100rpx;
+  align-content: center;
+  
+}
+
+/* miniprogram/pages/record/record.wxss */
+
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+
+.words {
+  font-weight: bold;
+  font-size: 48rpx;
+  margin-top: 50rpx;
+  text-align: center;
+}
+
+.content > view {
+  font-size: 32rpx;
+  border: 1rpx solid #eee;
+  border-radius: 10rpx;
+  margin-left: 80rpx;
+  margin-right: 80rpx;
+  margin-bottom: 50rpx;
+  color: black;
+}
+
+input {
+  margin: 20rpx;
+  padding-left: 20rpx;
+}
+
+button {
+  font-size: 36rpx;
+  height: 100rpx;
+  line-height: 60rpx;
+  background: #eee;
+  color: black;
+}
+
+.content .phcolor {
+  color: #ccc;
+}
+
+.check-result {
+  align-content: center;
+  border: 1rpx solid #eee;
+  border-radius: 10rpx;
+  margin-left: 80rpx;
+  margin-right: 80rpx;
+  margin-bottom: 50rpx;
+}
+
+.check-item {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  background-color: #f6f6f6;
+  border-radius: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.check-item > view {
+  padding: 20rpx;
+}
+
+.phone {
+  display: flex;
+  flex-direction: row;
+}
+
+.phone > image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+}
+
+.title {
+  margin-top: 50rpx;
+  text-align: center;
+  width: 100vw;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.scroll-views {
+  height: 100%;
+}
+
+.blank {
+  color: lightgray;
+  text-align: center;
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+  top: 50vh;
+  font-size:35rpx;
+}
+/*------------------------------------------------------------------*/
+.interval{
+  height:60rpx;
+}

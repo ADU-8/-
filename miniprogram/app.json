@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/borrow/borrow",
+    "pages/updateuserinfo/updateuserinfo",
+    "pages/myrecord/myrecord",
+    "pages/allrecord/allrecord",
+    "pages/equip/equip",
+    "pages/admin/admin",
+    "pages/alluserinfo/alluserinfo",
+    "pages/deleteequip/deleteequip",
+    "pages/test/test",
+    "pages/updatelog/updatelog"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "QSCamera",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#bbbbbb",
+    "selectedColor": "#3963BC",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/login.png",
+        "selectedIconPath": "images/login.png"
+      },
+      {
+        "pagePath": "pages/borrow/borrow",
+        "text": "我要借",
+        "iconPath": "images/borrow.png",
+        "selectedIconPath": "images/borrow.png"
+      },
+      {
+        "pagePath": "pages/equip/equip",
+        "iconPath": "images/qicai.png",
+        "selectedIconPath": "images/qicai.png",
+        "text": "器材查询"
+      },
+      {
+        "pagePath": "pages/allrecord/allrecord",
+        "iconPath": "images/query.png",
+        "text": "出借记录",
+        "selectedIconPath": "images/query.png"
+      },
+      {
+        "pagePath": "pages/myrecord/myrecord",
+        "text": "我的记录",
+        "iconPath": "images/record.png",
+        "selectedIconPath": "images/record.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

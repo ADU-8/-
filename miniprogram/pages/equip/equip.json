@@ -1,0 +1,4 @@
+{
+  "usingComponents": {"v-equipcard": "/components/equipcard/index",
+    "v-tag": "/components/tag/index"}
+}

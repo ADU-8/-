@@ -1,0 +1,4 @@
+<!--miniprogram/pages/updatelog/updatelog.wxml-->
+<view wx:for="{{VersionInfo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+<v-updatecard Version="{{item.Version}}" Content="{{item.Content}}" />
+</view>

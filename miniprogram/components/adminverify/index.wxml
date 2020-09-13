@@ -1,0 +1,30 @@
+<!--components/adminverify/index.wxml-->
+<view class="but">
+	<button wx-if="{{!IsVerified}}" class="bg-btn lg bg-gradual-blue margin-top" style="font-size:32rpx;" bindtap="showModal">中管认证</button>
+</view>
+<view class="but">
+	<button wx-if="{{IsVerified}}" class="bg-blue block margin-top" disabled>当前身份：部门中管</button>
+</view>
+
+
+
+
+<view class="cu-modal {{IsVerifying?'show':''}} ">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">请输入部门中管认证码</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding">
+			<view class="cu-form-group">
+				<input password="{{!IsPasswordShow}}" placeholder="请输入部门中管邀请码" bindinput="CheckInvitationCode"></input>
+				<text wx-if="{{!IsInviteCodeCorrect}}" class=".cuIcon-roundclosefill text-blue margin-right"></text>
+				<text wx-if="{{IsInviteCodeCorrect}}" class="cuIcon-roundcheckfill text-blue margin-right"></text>
+				<text wx-if="{{!IsPasswordShow}}" bindtap="ChangePasswordStatus" class=".cuIcon-attentionforbid text-blue"></text>
+				<text wx-if="{{IsPasswordShow}}" bindtap="ChangePasswordStatus" class=".cuIcon-attentionfavor text-blue"></text>
+			</view>
+		</view>
+	</view>
+</view>

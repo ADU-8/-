@@ -1,0 +1,26 @@
+/**index.wxss**/
+page {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bg {
+  bottom: 0rpx;
+  position: fixed;
+  width:750rpx;
+  height:750rpx;
+  z-index: -1;
+}
+
+.version{
+  top:0px;
+  left:0px;
+}
+
+.author{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}

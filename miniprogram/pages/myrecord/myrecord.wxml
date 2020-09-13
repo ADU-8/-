@@ -1,0 +1,6 @@
+<!--miniprogram/pages/myrecord/myrecord.wxml-->
+<view wx:for="{{MyRecord}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}"/>
+</view>
+
+<view wx-if="{{!MyRecord.length}}" class="blank"> 暂无未归还记录</view>

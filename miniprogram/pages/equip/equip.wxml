@@ -1,0 +1,42 @@
+<!--miniprogram/pages/equip/equip.wxml-->
+
+
+<view wx-if="{{IsLogin}}" class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索器材" confirm-type="search" bindconfirm="searchEquip" bindfocus="BindfocusSearchEquip"></input>
+	</view>
+  <button bindtap="HideSearchEquip" wx-if="{{IsSearch}}" class="bt cu-btn line-grey">取消</button>
+	<switch class="switch-type margin-right-sm margin-left-sm" checked="true" bindchange="changeSwitch"></switch>
+</view>
+<view style="height:120rpx;"></view>
+
+<view class="history" wx-if="{{IsSearch&&IsLogin}}">
+	<view class="title">
+		<view class="chunk"></view>
+		<text>历史搜索</text>
+	</view>
+	<view class="tags">
+		<block wx:key="" wx:for="{{historyWords}}">
+			<v-tag catch:tapping="onConfirm" text="{{item}}" />
+		</block>
+	</view>
+</view>
+
+<view wx-if="{{SwitchType&&!IsSearch&&IsLogin}}" wx:for="{{AllEquip_Video}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="user" />
+</view>
+
+<view wx-if="{{!SwitchType&&!IsSearch&&IsLogin}}" wx:for="{{AllEquip_Photo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="user"/>
+</view>
+
+<view wx-if="{{IsSearch&&IsLogin}}" wx:for="{{SearchRes}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="user"/>
+</view>
+
+<view wx-if="{{IsSearch&&SearchRes.length==0&&IsLogin}}" class="blank">
+	暂无相关器材
+</view>
+
+<view wx-if="{{!IsLogin}}" class="blank"> 请先登录</view>

@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<view class="version padding text-shadow" bindtap="ShowModal2">V1.3.0</view>
+<image class="bg" src="../../images/bg4.png"></image>
+<button wx-if="{{IsReady&&IsLogin&&userInfo.IsVerified}}" bindtap="GoAdmin" class='bt cu-btn line-blue' style="position:absolute;right:10rpx;top:15rpx;">后台入口</button>
+<v-loading wx-if="{{!IsReady}}" />
+<v-userinfo wx-if="{{IsReady&&IsLogin}}" username="{{userInfo.name}}" userphone="{{userInfo.phone}}" usertype="{{userInfo.usertype}}" />
+
+<button wx-if="{{IsReady&&IsLogin}}" class="cu-btn lg bg-gradual-blue margin-top margin-bottom" style="width:40%; margin-left:30%;" bindtap="UpdateUserInfo">修改个人信息</button>
+<v-adminverify bind:verifysuccess="VerifySuccess" wx-if="{{IsReady&&IsLogin}}" usertype="{{userInfo.usertype}}" IsVerified="{{userInfo.IsVerified}}" />
+<v-register bind:Register="onRegister" wx-if="{{IsReady&&!IsLogin}}" />
+
+<view class="cu-modal show" wx-if="{{IsFirst}}">
+	<view class="cu-dialog">
+		<view class="bg-img" style="height:300rpx;">
+			<view style="margin-top:20rpx;"> <text class="text-blue" style="font-size:40rpx;">欢迎来到QSCamera</text></view>
+			<view style="width:70%;height:80%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp"> 这是一款为求是潮视频团队与摄影部两个部门打造的器材借还小程序。旨在简化借还流程，加强部门沟通，同时便于器材损坏追责。</text></view>
+		</view>
+		<view class="cu-bar bg-white">
+			<view class="action margin-0 flex-sub  solid-left" bindtap="HideModal">开始体验</view>
+		</view>
+	</view>
+</view>
+
+<view class="cu-modal show" wx-if="{{VersionModal||IsUpdateFirst}}">
+	<view class="cu-dialog">
+		<view class="bg-img">
+		<view style="margin-top:20rpx;"> <text class="text-blue" style="font-size:40rpx;">V {{Version}}版本更新</text></view>
+		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、新增版本更新日志记录</text></view>
+		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、大幅优化器材借还速度，首页数据加载速度</text></view>
+		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">3、新增电话一键拨打功能，点击借用记录上借用者的电话将一键进入电话拨打界面</text></view>
+		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">4、后台记录数据查询速度优化，分批次查询记录数据</text></view>
+		<view style="width:70%;margin-left:15%;margin-top:5%;margin-bottom:5%;text-align:left;"><text space="emsp">5、后台入口UI优化调整</text></view>
+			<view style="width:70%;margin-left:15%;margin-top:5%;margin-bottom:5%;text-align:left;"><text space="emsp">6、修复部分手机号无法注册的问题</text></view>
+	</view>
+		<view class="cu-bar bg-white">
+			<view class="action margin-0 flex-sub  solid-left border" bindtap="HideModal2">我知道了</view>
+			<view>|</view>
+			<view class="action margin-0 flex-sub  solid-left" bindtap="GoUpdateLog">以往版本记录</view>
+		</view>
+	</view>
+</view>
+<view class="author text-shadow">Copyright@2020 by Incas</view>

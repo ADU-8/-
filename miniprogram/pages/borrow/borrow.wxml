@@ -1,0 +1,132 @@
+<!--miniprogram/pages/borrow/borrow.wxml-->
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">器材借用</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="but">
+	<button class="cu-btn bg-gradual-blue margin-bottom" form-type="submit" style="font-size:35rpx;" catchtap="showMultiple_video">视频团队器材</button>
+		<button class="cu-btn bg-gradual-purple margin-bottom" form-type="submit" style="font-size:35rpx;" catchtap="showMultiple_photo">摄影部器材</button>
+</view>
+
+<multiple id="multiple_video" bind:multipleCancel="multipleCancel_video" bind:multipleConfirm="multipleConfirm_video" multipleContent='当前可借器材(视频团队)' multiple_list="{{Video_list}}">
+</multiple>
+
+<multiple id="multiple_photo" bind:multipleCancel="multipleCancel_photo" bind:multipleConfirm="multipleConfirm_photo" multipleContent='当前可借器材(摄影部)' multiple_list="{{Photography_list}}">
+</multiple>
+
+
+
+<view class="cu-list menu card-menu margin-bottom">
+	<view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-circlefill text-grey"></text>
+			<text class="text-grey">已选择器材（视频团队）:</text>
+		</view>
+	</view>
+	<view class="cu-item" wx-if="{{VideoChoosed_list.length==0}}">
+		<view class="content">
+			<text class="cuIcon-right text-grey"></text>
+			<text class="text-grey">暂无</text>
+		</view>
+	</view>
+</view>
+
+
+
+<view class="cu-list menu card-menu margin-bottom">
+	<view class="cu-item" wx:for="{{VideoChoosed_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+		<view class="content">
+			<text class="cuIcon-right text-grey"></text>
+			<text class="text-grey">{{item.equipmentname}}</text>
+		</view>
+	</view>
+	
+</view>
+
+<view class="cu-list menu card-menu margin-bottom">
+	<view class="cu-item">
+		<view class="content">
+			<text class="cuIcon-circlefill text-grey"></text>
+			<text class="text-grey">已选择器材（摄影部）:</text>
+		</view>
+	</view>
+		<view class="cu-item" wx-if="{{PhotographyChoosed_list.length==0}}">
+		<view class="content">
+			<text class="cuIcon-right text-grey"></text>
+			<text class="text-grey">暂无</text>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu card-menu margin-bottom">
+	<view class="cu-item" wx:for="{{PhotographyChoosed_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+		<view class="content">
+			<text class="cuIcon-right text-grey"></text>
+			<text class="text-grey">{{item.equipmentname}}</text>
+		</view>
+	</view>
+</view>
+
+
+<form bindsubmit="FormSubmit">
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group">
+				<view class="title">借用日期</view>
+				<picker name="startdate" mode="date" value="{{StartDate}}" start="{{Today}}" end="{{DateBorder}}" bindchange="BindStartDateChange">
+					<view>{{StartDate}}</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">借用时间</view>
+				<picker name="starttime" mode="time" value="{{StartTime}}" start="00:00" end="23:59" bindchange="BindStartTimeChange">
+					<view>{{StartTime}}</view>
+				</picker>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group">
+				<view class="title">预计归还日期</view>
+				<picker name="enddate" mode="date" value="{{EndDate}}" start="{{Today}}" end="{{DateBorder}}" bindchange="BindEndDateChange">
+					<view>{{EndDate}}</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">预计归还时间</view>
+				<picker name="endtime" mode="time" value="{{EndTime}}" start="00:00" end="23:59" bindchange="BindEndTimeChange">
+					<view>{{EndTime}}</view>
+				</picker>
+			</view>
+
+
+		</view>
+	</view>
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group align-start">
+				<view class="title">用途简介</view>
+				<textarea class="detailText" placeholder-class="phcolor" placeholder="Usage Description" value="{{Purpose}}" bindinput="BindPurposeInput"></textarea>
+			</view>
+		</view>
+	</view>
+
+	<view class="padding-lr padding-bottom flex flex-direction">
+		<button class="bt cu-btn bg-blue margin-tb-sm lg" form-type="submit">提交</button>
+	</view>
+</form>
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+  <view class='gray-text'>{{Msg1}}</view>
+	<view class='gray-text'>{{Msg4}}</view>
+	<view class='gray-text'>{{Msg2}}{{Msg3}}</view>
+</view>

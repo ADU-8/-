@@ -1,0 +1,17 @@
+<!--miniprogram/pages/deleteequip/deleteequip.wxml-->
+
+<view wx-if="{{usertype=='视频团队'}}" wx:for="{{AllEquip_Video}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard bindUp="Up" equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
+	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
+		<button class="bt cu-btn line-orange">
+			<text class="cuIcon-upload"></text>删除该设备</button>
+	</view>
+</view>
+
+<view wx-if="{{usertype !='视频团队'}}" wx:for="{{AllEquip_Photo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
+	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
+		<button class="bt cu-btn line-orange">
+			<text class="cuIcon-upload"></text>删除该设备</button>
+	</view>
+</view>

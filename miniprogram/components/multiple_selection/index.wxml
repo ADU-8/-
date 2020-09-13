@@ -1,0 +1,29 @@
+<!--component/multiple_selection/multiple_selection.wxml-->
+
+<view class='singer-bg shadow padding margin-bottom' wx:if="{{isShow}}">
+	<view class='singer-body'>
+		<view class='singer-body-name'>
+			<view class='singer-body-name-line'></view>
+			<view class='singer-body-name-txt'>{{multipleContent}}</view>
+			<view class='singer-body-name-line'></view>
+		</view>
+
+		<view class='singer-body-list'>
+			<block wx:for="{{list}}" wx:for-item="item" wx:key="idx" wx:for-index="idx">
+				<view wx:if='{{item.status==1}}'>
+					<view class='list-item-choosed' wx:if='{{item.type=="choosed"}}' data-mkh='{{idx}}' bindtap='choose_item'>
+						<view class='item-choosed-txt'>{{item.equipmentname}}</view>
+					</view>
+					<view class='list-item' data-mkh='{{idx}}' bindtap='choose_item' wx:else>
+						<view class='item-txt'>{{item.equipmentname}}</view>
+					</view>
+				</view>
+			</block>
+		</view>
+
+		<view class='but'>
+			<view class='cu-btn lg bg-gradual-purple' style="border-radius:10rpx;" catchtap='_multipleCancel'>取消</view>
+			<view class='cu-btn lg bg-gradual-blue'  style="border-radius:10rpx;" catchtap='_multipleConfirm'>确定</view>
+		</view>
+	</view>
+</view>

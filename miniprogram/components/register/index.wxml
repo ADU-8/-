@@ -1,0 +1,65 @@
+<!--components/register/index.wxml-->
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">信息注册</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
+	</view>
+</view>
+<form bindsubmit="formSubmit">
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group ">
+				<view class="title">用户名</view>
+				<input name="name" placeholder="请输入能够标识身份的用户名"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">手机号码</view>
+				<input name="phone" placeholder="请输入手机号码" bindinput="BindPhoneInput"></input>
+				<view class="cu-capsule radius">
+					<view class="cu-tag bg-blue">
+						+86
+					</view>
+					<view class="cu-tag line-blue" wx-if="{{!IsPhoneCodeSend}}" bindtap="SendMsg">
+						发送验证码
+					</view>
+					<view class="cu-tag line-blue" wx-if="{{IsPhoneCodeSend}}">
+						{{Time}}s后重试
+					</view>
+				</view>
+			</view>
+			<view class="cu-form-group ">
+				<view class="title">验证码</view>
+				<input name="code" placeholder="请输入手机验证码" bindinput="CheckPhoneCode"></input>
+				<text wx-if="{{!IsPhoneCodeCorrect}}" class=".cuIcon-roundclosefill text-blue margin-right"></text>
+				<text wx-if="{{IsPhoneCodeCorrect}}" class="cuIcon-roundcheckfill text-blue margin-right"></text>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group ">
+				<view class="title">注册部门</view>
+				<picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+					<view class="picker">
+						{{picker[index]}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">邀请码</view>
+				<input password="{{!IsPasswordShow}}" placeholder="请输入部门内部邀请码" bindinput="CheckInvitationCode"></input>
+				<text wx-if="{{!IsInviteCodeCorrect}}" class=".cuIcon-roundclosefill text-blue margin-right"></text>
+				<text wx-if="{{IsInviteCodeCorrect}}" class="cuIcon-roundcheckfill text-blue margin-right"></text>
+				<text wx-if="{{!IsPasswordShow}}" bindtap="ChangePasswordStatus" class=".cuIcon-attentionforbid text-blue"></text>
+				<text wx-if="{{IsPasswordShow}}" bindtap="ChangePasswordStatus" class=".cuIcon-attentionfavor text-blue"></text>
+			</view>
+		</view>
+	</view>
+	<view class="padding-lg flex flex-direction">
+		<button class="bt cu-btn bg-blue lg " form-type="submit">注册</button>
+	</view>
+</form>

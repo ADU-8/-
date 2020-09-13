@@ -1,0 +1,75 @@
+/* components/recordcard/index.wxss */
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
+.whiteboard {
+  background-color: white;
+  top: 0;
+  position: fixed;
+  width: 100vw;
+}
+
+.logoimage {
+  margin-left: 20rpx;
+  width: 240rpx;
+  height: 80rpx;
+}
+
+.gradual {
+  position: fixed;
+  width: 100vw;
+  height: 30vh;
+  border-bottom-left-radius: 16vh;
+  border-bottom-right-radius: 16vh;
+}
+
+.backup {
+  background: -webkit-linear-gradient(top, #0081ff, rgba(1,1,1,0));
+}
+
+.ButtomBar {
+  position: fixed;
+  width: 100%;
+  bottom: 0rpx;
+  z-index: 999;
+}
+
+.headNavi {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.load{
+  text-align: center;
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+  top: 40vh;
+}
+
+.cardItem {
+  height: 380rpx;
+  border-radius: 20rpx;
+  padding-left: 20rpx;
+  margin: 24rpx;
+}
+
+.cardimg {
+  position: absolute;
+  height: 380rpx;
+  width: 400rpx;
+  border-radius: 20rpx;
+  right: 24rpx;
+}
+
+.cardimg-overlay {
+  position: absolute;
+  height: 380rpx;
+  width: 400rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  right: 24rpx;
+  background: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0.8),rgba(255,255,255,0.5));
+}

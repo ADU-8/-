@@ -1,0 +1,32 @@
+<!--components/adminpassword/index.wxml-->
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">密码管理</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group">
+				<view class="title">修改邀请码</view>
+				<input placeholder="输入新成员邀请码" bindinput="BindInviteCodeInput" value="{{InviteCode}}" password="true"></input>
+        <button class="cu-btn round shadow bg-gradual-blue" bindtap="inviteSubmit">更新</button>
+			</view>
+		</view>
+	</view>
+
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-form-group">
+				<view class="title">修改密码</view>
+				<input name="phone" placeholder="输入新中管认证码" bindinput="BindPasswordInput" value="{{Password}}" password="true"></input>
+        <button class="cu-btn round shadow bg-gradual-blue" bindtap="adminSubmit">更新</button>
+			</view>
+		</view>
+	</view>

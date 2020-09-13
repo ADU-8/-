@@ -1,0 +1,18 @@
+<view class="tab">
+	<view class="tab-item {{tab==0?'active':''}}" bindtap="changeItem" data-item="0">后台信息管理</view>
+	<view class="tab-item {{tab==1?'active':''}}" bindtap="changeItem" data-item="1">借用记录查询</view>
+</view>
+<view class="content">
+	<swiper current="{{item}}" bindchange="changeTab">
+		<swiper-item>
+			<include src="password.wxml" />
+		</swiper-item>
+		<swiper-item>
+			<scroll-view scroll-y class='scroll-views' bindscrolltolower='scrollToLower'>
+				<view>
+					<include src="recording.wxml" />
+				</view>
+			</scroll-view>
+		</swiper-item>
+	</swiper>
+</view>

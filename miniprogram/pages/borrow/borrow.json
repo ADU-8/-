@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "multiple": "/components/multiple_selection/index"
+  }
+}

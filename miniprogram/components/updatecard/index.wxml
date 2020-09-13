@@ -1,0 +1,8 @@
+<!--components/updatecard/index.wxml-->
+
+<view class="bg-white margin radius shadow padding-sm">
+	<view class="margin"> <text class="text-blue" style="font-size:40rpx;">{{Version}}版本更新</text></view>
+	<view wx:for="{{Content}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+    <view class="margin">{{item}}</view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+{
+  "usingComponents": {
+    "v-updatecard": "/components/updatecard/index"  }
+}

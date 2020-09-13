@@ -1,0 +1,6 @@
+{
+  "usingComponents": {"v-recordcard": "/components/recordcard/index",
+    "v-adminpassword": "/components/adminpassword/index",
+    "v-adminequip": "/components/adminequip/index"
+  }
+}

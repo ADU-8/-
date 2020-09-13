@@ -1,0 +1,16 @@
+<form bindsubmit="AddEquip">
+  <view class="content">
+    <view style="border:2rpx;">
+      <input name="name" placeholder-class="phcolor" placeholder="输入新设备名称" />
+      	<radio-group class="block margin-left margin-bottom margin-top" bindchange='Equipradiochange'>
+		<view>
+			<radio class="blue margin-left-sm" value="true" checked="{{EquipCheck==1}}"></radio><text>可外借器材</text>
+			<radio class="grey margin-left-sm" value="false"></radio><text>非外借器材</text>
+		</view>
+	</radio-group>
+    </view>
+    <button class="bt cu-btn lg bg-blue" style="width:40%; margin-left:30%;" form-type="submit">增加新设备</button>
+  </view>
+</form>
+
+<button class="bt cu-btn lg bg-blue" style="width:50%; margin-left:25%;" bindtap="goDelete">点我去删除设备</button>

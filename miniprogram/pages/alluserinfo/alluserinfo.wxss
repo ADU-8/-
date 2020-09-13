@@ -1,0 +1,50 @@
+/* miniprogram/pages/alluserinfo/alluserinfo.wxss */
+
+
+.table {
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-radius: 20rpx;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+}
+.bg-w{
+  background: #EEEEEE;
+}
+.bg-g{
+  background: #F6F6F6;
+}
+.th1 {
+  width: 50%;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+.th2 {
+  width: 50%;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+.button-copy {
+  margin-bottom: 30rpx;
+}
+.img{
+  width:30rpx;
+  height:30rpx;
+}

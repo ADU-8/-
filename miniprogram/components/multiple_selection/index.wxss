@@ -1,0 +1,140 @@
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
+.but{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top:30rpx;
+}
+
+.singer-bg .singer-body .singer-body-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+
+}
+ 
+.singer-bg .singer-body .singer-body-name .singer-body-name-line {
+  width: 150rpx;
+  border-bottom: 2rpx solid rgb(174, 169, 169)
+}
+ 
+.singer-bg .singer-body .singer-body-name .singer-body-name-txt {
+  height: 48rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  line-height: 48rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+ 
+.singer-bg .singer-body .singer-body-list {
+  width: 100%;
+  max-height: 650rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 0rpx 5rpx 0rpx 20rpx;
+  overflow: auto;
+}
+ 
+.singer-bg .singer-body .singer-body-list .list-item-choosed {
+  width: 182rpx;
+  height: 70rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background: rgba(191, 213, 236, 1);
+  border-radius: 6rpx;
+  margin-right: 30rpx;
+  padding: 0rpx 10rpx 0rpx 10rpx;
+  margin-bottom: 30rpx;
+}
+ 
+.singer-bg .singer-body .singer-body-list .list-item-choosed .item-choosed-txt {
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color:linear-gradient(45deg, #0081ff, #1cbbb4);
+  line-height: 70rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+ 
+.singer-bg .singer-body .singer-body-list .list-item {
+  width: 210rpx;
+  height: 70rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+  padding: 0rpx 5rpx 0rpx 5rpx;
+  margin-bottom: 30rpx;
+}
+ 
+.singer-bg .singer-body .singer-body-list .list-item  .item-txt {
+  font-size: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 70rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+ 
+ 
+.singer-bg .singer-body .singer-body-icon {
+  width: 100%;
+  height: 110rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  z-index: 9999999999;
+  background: rgba(255, 255, 255, 1);
+}
+ 
+.singer-bg .singer-body .singer-body-icon .icon-left {
+  width: 500rpx;
+  height: 110rpx;
+  background: rgba(0, 89, 179, 0.1);
+  font-size: 36rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(0, 89, 179, 1);
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.singer-bg .singer-body .singer-body-icon .icon-right {
+  width: 500rpx;
+  height: 110rpx;
+  background: linear-gradient(45deg, #0081ff, #1cbbb4);
+  font-size: 36rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "v-register": "/components/register/index",
+    "v-userinfo": "/components/userinfo/index",
+    "v-loading": "/components/loading/index",
+    "v-adminverify": "/components/adminverify/index"
+  
+  }
+}
