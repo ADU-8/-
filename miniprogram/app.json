@@ -33,7 +33,7 @@
       },
       {
         "pagePath": "pages/borrow/borrow",
-        "text": "我要借",
+        "text": "器材借用",
         "iconPath": "images/borrow.png",
         "selectedIconPath": "images/borrow.png"
       },

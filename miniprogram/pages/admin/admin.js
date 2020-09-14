@@ -35,6 +35,7 @@ Page({
     IsLoadweekAll: false,
     IsLoadmonthAll: false,
     IsLoadallAll: false,
+    IsLoading:true
   },
 
   /**
@@ -51,7 +52,8 @@ Page({
         usertype,
         weekrecord: await weekrecord,
         monthrecord: await monthrecord,
-        allrecord: await allrecord
+        allrecord: await allrecord,
+        IsLoading:false
       })
     })
 

@@ -1,3 +1,4 @@
+<view wx-if="{{IsLoading}}" class="cu-load loading"></view>
 	<radio-group class="block margin-left margin-bottom" bindchange='radiochange'>
 		<view>
 			<radio class="blue margin-left-sm" value="weekrecord" checked="{{CheckItem==1}}"></radio><text>一周内记录</text>
