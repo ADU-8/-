@@ -27,10 +27,10 @@ Page({
     PhotographyChoosed_list: [],
     Purpose: "",
     loadModal: false,
-    Msg1: "视频团队",
-    Msg2: "0/",
-    Msg3: 1,
-    Msg4: "器材校验中"
+    Msg1: "校验器材中",
+    Msg2: "",
+    Msg3: "",
+    Msg4: ""
   },
 
   /**
@@ -144,23 +144,21 @@ Page({
       let EquipCheck = true;
       let VideoChoosed_listLength = this.data.VideoChoosed_list.length
       this.setData({
-        Msg1: "校验器材中",
-        Msg2: "",
-        Msg3: "",
-        Msg4: "",
         loadModal: true
       })
-      var temp = []
-      for (var i = 0; i < VideoChoosed_listLength; i++) {
+	  var temp = []
+      //视频团队器材校验
+	  for (var i = 0; i < VideoChoosed_listLength; i++) {
         temp.push(equipModel.CheckEquip(this.data.VideoChoosed_list[i]._id))
       }
-
+	  //摄影部器材校验
       let PhotographyChoosed_listLength = this.data.PhotographyChoosed_list.length
       if (PhotographyChoosed_listLength != 0) {
         for (var i = 0; i < PhotographyChoosed_listLength; i++) {
           temp.push(equipModel.CheckEquip(this.data.PhotographyChoosed_list[i]._id))
         }
       }
+	  //等待校验完成进行下一步借用：
       Promise.all(temp).then(async res => {
         for (var i = 0; i < VideoChoosed_listLength + PhotographyChoosed_listLength; i++) {
           EquipCheck = EquipCheck && res[i]
@@ -169,18 +167,18 @@ Page({
         const that = this
         //借用器材
         if (EquipCheck) {
+		  //借用视频团队器材
           for (var i = 0; i < VideoChoosed_listLength; i++) {
             equipModel.BorrowEquip(this.data.VideoChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo)
           }
+		  //借用摄影部器材
           for (var i = 0; i < PhotographyChoosed_listLength; i++) {
             equipModel.BorrowEquip(this.data.PhotographyChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo)
           }
           this.setData({
             Msg1: "创建租借记录中",
-            Msg2: "",
-            Msg3: "",
-            Msg4: ""
           })
+		  //创建租借记录
           await recordModel.CreateBorrowRecord(this.data.VideoChoosed_list, this.data.PhotographyChoosed_list, this.data.StartDate, this.data.StartTime, this.data.EndDate, this.data.EndTime, this.data.Purpose, BorrowManInfo)
           this.setData({
             loadModal: false
