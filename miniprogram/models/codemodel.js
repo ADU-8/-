@@ -31,6 +31,18 @@ class CodeModel extends HTTP {
       }
     })
   }
+
+  async SendError(name,phone,usertype,openid) {
+    return await this.request({
+      name: "SendError",
+      data: {
+        name,
+        phone,
+        usertype,
+        openid
+      }
+    })
+  }
 }
 
 export {

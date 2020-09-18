@@ -14,7 +14,7 @@ const userModel = new UserModel()
 const equipModel = new EquipModel()
 Page({
   data: {
-    Version:"1.3.0",
+    Version: "1.3.1",
     IsReady: 0,
     userInfo: {},
     IsLogin: 0,
@@ -26,7 +26,8 @@ Page({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     setTimeout(function() {
-      // complete
+      var that = this;
+      that.onLoad()
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1000);
@@ -52,12 +53,10 @@ Page({
     this.CheckIsFirst()
     const userOpenid = await userModel.GetOpenid()
     const userInfo = userModel.GetUserInfo(userOpenid)
-    const VideoInvitationCode = null
-    const PhotographyInvitationCode = null
-    if (!userInfo) {
-      VideoInvitationCode = codeModel.GetCode("VideoInvitationCode")
-      PhotographyInvitationCode = codeModel.GetCode("PhotographyInvitationCode")
-    }
+
+    const VideoInvitationCode = codeModel.GetCode("VideoInvitationCode")
+    const PhotographyInvitationCode = codeModel.GetCode("PhotographyInvitationCode")
+
     const VideoAdminPassword = codeModel.GetCode("VideoAdminPassword")
     const PhotographyAdminPassword = codeModel.GetCode("PhotographyAdminPassword")
 
@@ -65,10 +64,8 @@ Page({
     const Equip_Photo = equipModel.GetEquip("Photo");
 
     Promise.all([userInfo,VideoInvitationCode, PhotographyInvitationCode, VideoAdminPassword, PhotographyAdminPassword, Equip_Video, Equip_Photo]).then(async res => {
-      if (!userInfo) {
-        wx.setStorageSync('VideoInvitationCode', await VideoInvitationCode)
-        wx.setStorageSync('PhotographyInvitationCode', await PhotographyInvitationCode)
-      }
+      wx.setStorageSync('VideoInvitationCode', await VideoInvitationCode)
+      wx.setStorageSync('PhotographyInvitationCode', await PhotographyInvitationCode)
       wx.setStorageSync('userInfo', await userInfo)
       wx.setStorageSync('VideoAdminPassword', await VideoAdminPassword)
       wx.setStorageSync('PhotographyAdminPassword', await PhotographyAdminPassword)
@@ -134,13 +131,13 @@ Page({
   CheckIsUpdateFirst(){
     console.log("1")
     var Version = wx.getStorageSync('version')
-    if (Version || Version == this.data.Version) {
-
-    } else {
+    if (Version != this.data.Version) {
       wx.setStorageSync('version', this.data.Version)
       this.setData({
         IsUpdateFirst: 1
       })
+    }else {
+    
     }
   },
   ShowModal2() {

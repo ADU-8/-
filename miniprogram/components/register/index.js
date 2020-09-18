@@ -6,9 +6,11 @@ import {
 import {
   MessageModel
 } from '../../models/messagemodel.js'
+import { CodeModel } from '../../models/codemodel.js'
 
 const userModel = new UserModel()
 const messageModel = new MessageModel()
+const codeModel = new CodeModel();
 Component({
   /**
    * 组件的属性列表
@@ -224,6 +226,36 @@ Component({
       this.setData({
         phone: e.detail.value
       })
+    },
+    BindNameInput(e) {
+      this.setData({
+        name: e.detail.value
+      })
+    },
+    async SendErrorReport(){
+      var name = this.data.name
+      var phone = this.data.phone
+      var usertype = this.data.usertype
+      wx.showModal({
+        title: '发送错误报告',
+        content: '是否无法注册需发送错误报告？(注意：请先填写您的用户名、手机、部门后，再提交错误报告！)',
+        showCancel: true,//是否显示取消按钮
+        success: async function (res) {
+          var that = this
+           if (res.cancel) {
+              //点击取消,默认隐藏弹框
+           } else {
+              //点击确定
+              const _openid = wx.getStorageSync('userOpenid');
+              await codeModel.SendError(name,phone,usertype,_openid)
+              wx.showToast({
+                title: '发送成功！',
+              })
+           }
+        },
+        fail: function (res) { },//接口调用失败的回调函数
+        complete: function (res) { },//接口调用结束的回调函数（调用成功、失败都会执行）
+     })
     }
   }
 
