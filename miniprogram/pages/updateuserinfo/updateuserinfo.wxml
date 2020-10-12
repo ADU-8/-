@@ -16,7 +16,13 @@
 				<view class="title">用户名</view>
 				<input name="name" placeholder="请输入能够标识身份的用户名" value="{{name}}"></input>
 			</view>
-					<view class="cu-form-group">
+				<view class="cu-form-group">
+				<view class="title">加入年份</view>
+				<picker name="starttime" mode="date" fields="year" value="{{StartTime}}" start="2015-01-01" end="{{Today}}" bindchange="BindEnterTimeChange">
+					<view>{{EnterTime}}</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
 				<view class="title">手机号码</view>
 				<input name="phone" placeholder="请输入手机号码" bindinput="BindPhoneInput" value="{{phone}}"></input>
 				<view class="cu-capsule radius">

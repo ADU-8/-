@@ -1,5 +1,15 @@
 <!--miniprogram/pages/allrecord/allrecord.wxml-->
 	<view wx-if="{{IsLoading}}" class="cu-load loading"></view>
+  <view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">所有正在外借记录</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
+	</view>
+</view>
 <view wx-if="{{IsLogin}}" wx:for="{{AllRecord_NotBack}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
 	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" 
   BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" 

@@ -31,6 +31,14 @@ Component({
     usertype: {
       type: String,
       value: "视频团队"
+    },
+    EnterTime:{
+      type:String,
+      value:""
+    },
+    Today:{
+      type:String,
+      value:""
     }
   },
 
@@ -57,7 +65,7 @@ Component({
         title: '注册中',
       })
       if (this.data.IsInviteCodeCorrect && this.data.IsPhoneCodeCorrect) {
-        let RegisterRes = await userModel.RegisterUserInfo(userOpenid, e.detail.value.name, e.detail.value.phone, this.data.picker[this.data.index])
+        let RegisterRes = await userModel.RegisterUserInfo(userOpenid, e.detail.value.name, e.detail.value.phone, this.data.picker[this.data.index],this.data.EnterTime)
         let userInfo = null
         if (RegisterRes) {
           console.log(RegisterRes)
@@ -66,7 +74,8 @@ Component({
             'phone': e.detail.value.phone,
             'usertype': this.data.picker[this.data.index],
             '_openid': userOpenid,
-            '_id': RegisterRes._id
+            '_id': RegisterRes._id,
+            'year':this.data.EnterTime
           }
         }
         wx.setStorageSync('userInfo', userInfo)
@@ -256,7 +265,13 @@ Component({
         fail: function (res) { },//接口调用失败的回调函数
         complete: function (res) { },//接口调用结束的回调函数（调用成功、失败都会执行）
      })
+    },
+    BindEnterTimeChange(e){
+      this.setData({
+        EnterTime:e.detail.value
+      })
     }
+
   }
 
 })

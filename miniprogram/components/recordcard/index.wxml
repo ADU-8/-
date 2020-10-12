@@ -14,7 +14,7 @@
 				<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-check margin-right margin-left"></text>已归还</view>
 				<view wx-if="{{CardType=='AdminRecord' && BackStatus!='1'}}"><text class="cuIcon-close margin-right margin-left"></text>未归还</view>
 				<view><text class="cuIcon-time margin-right margin-left"></text>{{StartDate}} {{StartTime}} ~ {{EndDate}} {{EndTime}}</view>
-				<view><text class="cuIcon-friend margin-right margin-left"></text>{{BorrowManInfo.name}}</view>
+				<view><text class="cuIcon-friend margin-right margin-left"></text>{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}}</view>
 				<view bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
 
 				<view wx-if="{{Video_list.length!=0}}"><text class="cuIcon-list margin-right margin-left"></text>借用器材（视频团队）：</view>

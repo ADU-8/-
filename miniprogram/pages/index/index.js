@@ -9,19 +9,21 @@ import {
 import {
   EquipModel
 } from '../../models/equipmodel.js'
+var util = require('../../util/util.js')
 const codeModel = new CodeModel()
 const userModel = new UserModel()
 const equipModel = new EquipModel()
 Page({
   data: {
-    Version: "1.3.1",
+    Version: "1.4.1",
     IsReady: 0,
     userInfo: {},
     IsLogin: 0,
     IsVerifying: 0,
     IsFirst: 0,
     VersionModal: false,
-    IsUpdateFirst:0
+    IsUpdateFirst:0,
+    Today:""
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -62,6 +64,11 @@ Page({
 
     const Equip_Video = equipModel.GetEquip("Video");
     const Equip_Photo = equipModel.GetEquip("Photo");
+   
+    const time = util.formatTime(new Date());
+    this.setData({
+      Today:time[0].slice(0,4)
+    })
 
     Promise.all([userInfo,VideoInvitationCode, PhotographyInvitationCode, VideoAdminPassword, PhotographyAdminPassword, Equip_Video, Equip_Photo]).then(async res => {
       wx.setStorageSync('VideoInvitationCode', await VideoInvitationCode)
@@ -82,6 +89,7 @@ Page({
         IsReady: 1
       })
     })
+
   },
   HideModal() {
     this.setData({

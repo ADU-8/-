@@ -92,10 +92,15 @@ Page({
       title: '删除成功',
     })
   },
+  
   bindCopy() {
     var result = "序号,部门,姓名,手机号\n";
     this.data.AllUser.forEach(function (value, index) {
-      result += (index + '、' + value.usertype + ',' + value.name + ',' + value.phone + '\n');
+      result += (index + '、' +value.year + '级' + value.usertype + ',' + value.name + ',' + value.phone);
+      if(value.IsVerified == true){
+        result += "（管理员）"
+      }
+      result += '\n'
     });
     wx.setClipboardData({
       data: result,

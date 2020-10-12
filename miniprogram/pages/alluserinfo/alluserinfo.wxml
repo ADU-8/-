@@ -8,13 +8,13 @@
   <block wx:for="{{AllUser}}" wx-if="{{SwitchType}}" wx:key="{{phone}}">
     <view class="tr bg-g" wx:if="{{index % 2 == 0 && item.usertype=='视频团队'}}">
       <text wx-if="{{item.usertype=='视频团队'}}" class="cuIcon-record"></text>
-      <view class="td">{{item.name}}</view>
+      <view class="td">{{item.year}}_{{item.name}}</view>
       <view class="td">{{item.phone}}</view>
       <text class="cuIcon-roundclose" data-id="{{item._id}}" bindtap="DeleteUser"></text>
     </view>
     <view wx:if="{{index % 2 == 1 && item.usertype=='视频团队'}}" class="tr">
       <text class="cuIcon-record"></text>
-      <view class="td">{{item.name}}</view>
+      <view class="td">{{item.year}}_{{item.name}}</view>
       <view class="td">{{item.phone}}</view>
       <text class="cuIcon-roundclose" data-id="{{item._id}}" bindtap="DeleteUser"></text>
     </view>
@@ -23,17 +23,17 @@
     <block wx:for="{{AllUser}}" wx-if="{{!SwitchType}}" wx:key="{{phone}}">
     <view class="tr bg-g" wx:if="{{index % 2 == 0 && item.usertype!='视频团队'}}">
       <text  class="cuIcon-cameraadd"></text>
-      <view class="td">{{item.name}}</view>
+      <view class="td">{{item.year}}_{{item.name}}</view>
       <view class="td">{{item.phone}}</view>
       <text class="cuIcon-roundclose" data-id="{{item._id}}" bindtap="DeleteUser"></text>
     </view>
     <view wx-if="{{index % 2 == 1 && item.usertype!='视频团队'}}" class="tr">
       <text class="cuIcon-cameraadd"></text>
-      <view class="td">{{item.name}}</view>
+      <view class="td">{{item.year}}_{{item.name}}</view>
       <view class="td">{{item.phone}}</view>
       <text class="cuIcon-roundclose" data-id="{{item._id}}" bindtap="DeleteUser"></text>
     </view>
   </block>
 </view>
 
-  <button class="bt cu-btn bg-blue" style="width:40%;margin-left:30%;" bindtap="bindCopy">复制表格(.csv)</button>
+  <button class="bt cu-btn bg-blue" style="width:40%;margin-left:30%;" bindtap="bindCopy">复制成员信息(.csv)</button>

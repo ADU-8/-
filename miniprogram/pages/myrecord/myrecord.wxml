@@ -1,6 +1,22 @@
 <!--miniprogram/pages/myrecord/myrecord.wxml-->
+<view wx-if="{{IsLoading}}" class="cu-load loading"></view>
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">我的正在外借记录</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
+	</view>
+</view>
 <view wx:for="{{MyRecord}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
 	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}"/>
 </view>
+
+	<view wx-if="{{!IsLoading}}" class="padding-lr padding-bottom flex flex-direction">
+		<button class="bt cu-btn bg-gradual-blue lg" open-type='contact' session-from='weapp'>联系客服</button> 
+	</view>
+
 
 <view wx-if="{{!MyRecord.length}}" class="blank"> 暂无未归还记录</view>

@@ -10,7 +10,8 @@ exports.main = async(event, context) => {
         name:event.name,
         phone:event.phone,
         usertype:event.usertype,
-        IsVerified:0
+        IsVerified:0,
+        year:event.year
       }
     });
   } catch (e) {

@@ -9,7 +9,8 @@ exports.main = async(event, context) => {
     return await db.collection("userinformation").doc(event._id).update({
       data: {
         name:event.name,
-        phone:event.phone
+        phone:event.phone,
+        year:event.yaer
       }
     })
   } catch (e) {

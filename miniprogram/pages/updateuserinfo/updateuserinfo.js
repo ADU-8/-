@@ -6,7 +6,7 @@ const userModel = new UserModel()
 import {
   MessageModel
 } from '../../models/messagemodel.js'
-
+var util = require('../../util/util.js')
 const messageModel = new MessageModel()
 Page({
 
@@ -18,7 +18,9 @@ Page({
     phone: null,
     Time: 120,
     IsPhoneCodeSend: false,
-    IsPhoneCodeCorrect: false
+    IsPhoneCodeCorrect: false,
+    Today:null,
+    EnterTime:null
   },
 
   /**
@@ -26,7 +28,10 @@ Page({
    */
   onLoad: function (options) {
     const userInfo = wx.getStorageSync('userInfo')
+    var time = util.formatTime(new Date());
     this.setData({
+      Today: time[0],
+      EnterTime:userInfo.year,
       name: userInfo.name,
       phone: userInfo.phone
     })
@@ -86,12 +91,13 @@ Page({
       wx.showLoading({
         title: '修改中',
       })
-      let RegisterRes = await userModel.UpdateUserInfo(_id, e.detail.value.name, e.detail.value.phone)
+      let RegisterRes = await userModel.UpdateUserInfo(_id, e.detail.value.name, e.detail.value.phone,this.data.EnterTime)
       let userInfo = wx.getStorageSync('userInfo')
       if (RegisterRes) {
         console.log(RegisterRes)
         userInfo['name'] = e.detail.value.name
         userInfo['phone'] = e.detail.value.phone
+        userInfo['year'] = this.data.EnterTime
       }
       wx.setStorageSync('userInfo', userInfo)
       wx.hideLoading()
@@ -202,6 +208,11 @@ Page({
   BindPhoneInput(e) {
     this.setData({
       phone: e.detail.value
+    })
+  },
+  BindEnterTimeChange(e){
+    this.setData({
+      EnterTime:e.detail.value
     })
   }
 })

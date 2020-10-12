@@ -27,6 +27,20 @@ class MessageModel extends HTTP {
     return temp
   }
 
+  async SendTipMsg(myphone,borrowman,equip,returntime,nowtime) {
+    const temp = await this.request({
+      name: "SendReturntips",
+      data:{
+        myphone,
+        borrowman,
+        equip,
+        returntime,
+        nowtime
+      }
+    })
+    console.log(temp)
+    return temp
+  }
 }
 
 export {

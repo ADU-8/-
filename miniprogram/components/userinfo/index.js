@@ -6,7 +6,8 @@ Component({
   properties: {
     username:String,
     userphone:String,
-    usertype:String
+    usertype:String,
+    year:String
   },
 
   /**

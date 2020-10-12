@@ -85,6 +85,19 @@ class RecordModel extends HTTP {
     console.log(temp)
     return temp.result.data
   }
+
+  async updateLastTipTime(_id,nowdate,nowtime){
+    const temp = await this.request({
+      name: "UpdateRecordLastTip",
+      data: {
+        _id,
+        nowdate,
+        nowtime
+      }
+    })
+    return temp
+
+  }
 }
 
 export {

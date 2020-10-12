@@ -26,7 +26,7 @@ class UserModel extends HTTP {
       return null
   }
 
-  async RegisterUserInfo(_openid, name, phone, usertype) {
+  async RegisterUserInfo(_openid, name, phone, usertype,year) {
     console.log(name, phone)
     if (name == "" || phone == "") {
       wx.showToast({
@@ -43,7 +43,8 @@ class UserModel extends HTTP {
             _openid: _openid,
             name: name,
             phone: phone,
-            usertype: usertype
+            usertype: usertype,
+            year:year
           }
         })
         return temp2.result
@@ -57,13 +58,14 @@ class UserModel extends HTTP {
     }
   }
 
-  async UpdateUserInfo(_id, name, phone) {
+  async UpdateUserInfo(_id, name, phone,year) {
     const temp = await this.request({
       name: "UpdateUserInfo",
       data: {
         _id: _id,
         name: name,
-        phone: phone
+        phone: phone,
+        year:year
       }
     })
     return temp.result

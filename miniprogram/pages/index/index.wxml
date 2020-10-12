@@ -3,11 +3,11 @@
 <image class="bg" src="../../images/bg4.png"></image>
 <button wx-if="{{IsReady&&IsLogin&&userInfo.IsVerified}}" bindtap="GoAdmin" class='bt cu-btn line-blue' style="position:absolute;right:10rpx;top:15rpx;">后台入口</button>
 <v-loading wx-if="{{!IsReady}}" />
-<v-userinfo wx-if="{{IsReady&&IsLogin}}" username="{{userInfo.name}}" userphone="{{userInfo.phone}}" usertype="{{userInfo.usertype}}" />
+<v-userinfo wx-if="{{IsReady&&IsLogin}}" username="{{userInfo.name}}" userphone="{{userInfo.phone}}" usertype="{{userInfo.usertype}}" year="{{userInfo.year}}" />
 
 <button wx-if="{{IsReady&&IsLogin}}" class="cu-btn lg bg-gradual-blue margin-top margin-bottom" style="width:40%; margin-left:30%;" bindtap="UpdateUserInfo">修改个人信息</button>
 <v-adminverify bind:verifysuccess="VerifySuccess" wx-if="{{IsReady&&IsLogin}}" usertype="{{userInfo.usertype}}" IsVerified="{{userInfo.IsVerified}}" />
-<v-register bind:Register="onRegister" wx-if="{{IsReady&&!IsLogin}}" />
+<v-register bind:Register="onRegister" Today="{{Today}}" EnterTime="{{Today}}" wx-if="{{IsReady&&!IsLogin}}" />
 
 <view class="cu-modal show" wx-if="{{IsFirst}}">
 	<view class="cu-dialog">
@@ -25,10 +25,9 @@
 	<view class="cu-dialog">
 		<view class="bg-img">
 		<view style="margin-top:20rpx;"> <text class="text-blue" style="font-size:40rpx;">V {{Version}}版本更新</text></view>
-		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、修复上版本因性能优化导致无法注册的问题 </text></view>
-		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、新增注册不成功时，右上角的提交错误报告按钮</text></view>
-
-	
+		<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、新增注册时需填写加入部门年份 </text></view>
+			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、借用记录处增加显示借用人部门及加入时间信息 </text></view>
+				<view style="width:70%;margin-left:15%;margin-top:5%;margin-bottom:5%;text-align:left;"><text space="emsp">3、我的记录界面新增客服会话，如遇问题可点击 </text></view>
 	</view>
 		<view class="cu-bar bg-white">
 			<view class="action margin-0 flex-sub  solid-left border" bindtap="HideModal2">我知道了</view>

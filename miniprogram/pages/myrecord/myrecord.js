@@ -8,7 +8,8 @@ Page({
    */
   data: {
     MyRecord:[],
-    IsBlank:true
+    IsBlank:true,
+    IsLoading:true
   },
 
   /**
@@ -19,7 +20,8 @@ Page({
     const MyRecord = await recordModel.GetMyRecord(_openid)
     const that = this
     this.setData({
-      MyRecord:MyRecord
+      MyRecord:MyRecord,
+      IsLoading:false
     })
     console.log(MyRecord)
   },
@@ -38,7 +40,8 @@ Page({
     const _openid = wx.getStorageSync('userOpenid')
     const MyRecord = await recordModel.GetMyRecord(_openid)
     this.setData({
-      MyRecord:MyRecord
+      MyRecord:MyRecord,
+      IsLoading:false
     })
     console.log(MyRecord)
   },
@@ -62,9 +65,13 @@ Page({
    */
   onPullDownRefresh:async function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.setData({
+      IsLoading:true,
+    })
     const _openid = wx.getStorageSync('userOpenid')
     const MyRecord = await recordModel.GetMyRecord(_openid)
     this.setData({
+      IsLoading:false,
       MyRecord:MyRecord
     })
     setTimeout(function() {
