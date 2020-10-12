@@ -1,4 +1,6 @@
-/**index.wxss**/
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
+
 page {
   background: #ffffff;
   display: flex;
@@ -15,9 +17,11 @@ page {
 }
 
 .version{
+  position:fixed;
   top:0px;
   left:0px;
 }
+
 
 .author{
   position: absolute;

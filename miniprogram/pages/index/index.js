@@ -15,7 +15,7 @@ const userModel = new UserModel()
 const equipModel = new EquipModel()
 Page({
   data: {
-    Version: "1.4.1",
+    Version: "1.4.2",
     IsReady: 0,
     userInfo: {},
     IsLogin: 0,
@@ -23,7 +23,8 @@ Page({
     IsFirst: 0,
     VersionModal: false,
     IsUpdateFirst:0,
-    Today:""
+    Today:"",
+    PlayMP4:false
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -165,6 +166,16 @@ Page({
     })
     wx.navigateTo({
       url: '../updatelog/updatelog',
+    })
+  },
+  PlayMP4(){
+    this.setData({
+      PlayMP4:true
+    })
+  },
+  HideMP4(){
+    this.setData({
+      PlayMP4:false
     })
   }
 

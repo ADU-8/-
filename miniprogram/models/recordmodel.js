@@ -98,6 +98,17 @@ class RecordModel extends HTTP {
     return temp
 
   }
+
+  async checkMsgSec(content){
+    console.log(content)
+    const temp = await this.request({
+      name: "msgSecCheck",
+      data: {
+        content
+      }
+    })
+    return temp
+  }
 }
 
 export {

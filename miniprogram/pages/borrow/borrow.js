@@ -138,6 +138,15 @@ Page({
       })
       return
     }
+    let SecCheckRes = await recordModel.checkMsgSec(this.data.Purpose);
+    let SecCheck = SecCheckRes.result.code
+    if(SecCheck == "500"){
+      wx.showToast({
+        icon:'none',
+        title: '用途简介中有非法内容!',
+      })
+    }
+    console.log(SecCheckRes)
     let FormCheck = this.checkEquip() && this.checkTime() && this.checkPurpose() && this.checkEquipCanbeBorrowOut()
     if (FormCheck) {
       //向云端请求时再一次确认这些器材未被借用
