@@ -9,7 +9,10 @@ Page({
   data: {
     AllEquip_Video: [],
     AllEquip_Photo: [],
-    usertype:"视频团队"
+    usertype:"视频团队",
+    IsSearch:false,
+    searchEquip_Photo:[],
+    searchEquip_Video:[]
   },
 
   /**
@@ -107,5 +110,46 @@ Page({
   },
   Up(event){
     console.log(event)
-  }
+  },
+  BindfocusSearchEquip() {
+    this.setData({
+      IsSearch: true
+    })
+  },
+  searchEquip(e) { //按下软键盘确认进行搜索
+    //存储搜索历史
+    this.Search(e.detail.value)
+  },
+  Search(text) { //搜索主函数
+    let searchEquip_Video = []
+    let searchEquip_Photo = []
+    var that = this
+    this.data.AllEquip_Video.forEach(function (item, index) {
+      if (that.countSubstr(item.equipmentname, text) != 0) {
+        searchEquip_Video.push(item)
+      }
+    })
+    this.data.AllEquip_Photo.forEach(function (item, index) {
+      if (that.countSubstr(item.equipmentname, text) != 0) {
+        searchEquip_Photo.push(item)
+      }
+    })
+    this.setData({
+      searchEquip_Photo,
+      searchEquip_Video
+    })
+
+  },
+  countSubstr(str, substr) {
+    var reg = new RegExp(substr, "g");
+    return str.match(reg) ? str.match(reg).length : 0; //若match返回不为null，则结果为true，输出match返回的数组(["test","test"])的长度
+  },
+  HideSearchEquip() {
+    this.setData({
+      IsSearch: false,
+      SearchRes: []
+    })
+  },
+  
+
 })

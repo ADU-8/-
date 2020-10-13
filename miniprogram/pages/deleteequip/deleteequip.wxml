@@ -1,6 +1,14 @@
 <!--miniprogram/pages/deleteequip/deleteequip.wxml-->
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
+	<view class="search-form round">
+		<text class="cuIcon-search"></text>
+		<input type="text" placeholder="搜索器材" confirm-type="search" bindconfirm="searchEquip" bindfocus="BindfocusSearchEquip"></input>
+	</view>
+  <button bindtap="HideSearchEquip" wx-if="{{IsSearch}}" class="bt cu-btn line-grey margin-right">取消</button>
+</view>
+<view style="height:120rpx;"></view>
 
-<view wx-if="{{usertype=='视频团队'}}" wx:for="{{AllEquip_Video}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+<view wx-if="{{usertype=='视频团队' && IsSearch}}" wx:for="{{searchEquip_Video}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
 	<v-equipcard bindUp="Up" equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
 	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
 		<button class="bt cu-btn line-orange">
@@ -8,10 +16,30 @@
 	</view>
 </view>
 
-<view wx-if="{{usertype !='视频团队'}}" wx:for="{{AllEquip_Photo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+<view wx-if="{{usertype !='视频团队' && IsSearch}}" wx:for="{{searchEquip_Photo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
 	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
 	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
 		<button class="bt cu-btn line-orange">
 			<text class="cuIcon-upload"></text>删除该设备</button>
 	</view>
+</view>
+
+<view wx-if="{{usertype=='视频团队' && !IsSearch}}" wx:for="{{AllEquip_Video}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard bindUp="Up" equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
+	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
+		<button class="bt cu-btn line-orange">
+			<text class="cuIcon-upload"></text>删除该设备</button>
+	</view>
+</view>
+
+<view wx-if="{{usertype !='视频团队' && !IsSearch}}" wx:for="{{AllEquip_Photo}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-equipcard equipmentname="{{item.equipmentname}}" status="{{item.status}}" backdate="{{item.backdate}}" backtime="{{item.backtime}}" type="{{item.type}}" EndTime="{{item.EndTime}}" BorrowManInfo="{{item.BorrowManInfo}}" cardType="admin"/>
+	<view class="margin-bottom" style="margin-left:450rpx;" bindtap="DeleteEquip" data-item="{{item}}" >
+		<button class="bt cu-btn line-orange">
+			<text class="cuIcon-upload"></text>删除该设备</button>
+	</view>
+</view>
+
+<view wx-if="{{IsSearch&&((usertype=='视频团队' && searchEquip_Video.length == 0)||(usertype=='摄影部' && searchEquip_Photo.length == 0))}}" class="blank">
+	暂无相关器材
 </view>
