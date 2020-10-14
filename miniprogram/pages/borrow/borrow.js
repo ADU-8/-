@@ -27,10 +27,11 @@ Page({
     PhotographyChoosed_list: [],
     Purpose: "",
     loadModal: false,
-    Msg1: "校验器材中",
+    Msg1: "文本内容安全校验中",
     Msg2: "",
     Msg3: "",
-    Msg4: ""
+    Msg4: "",
+    IsComitting:false
   },
 
   /**
@@ -131,10 +132,27 @@ Page({
 
   },
   async FormSubmit(e) {
+    var IsComitting = this.data.IsComitting
+    if(IsComitting){
+      return
+    }
     if (!app.globalData.IsLogin) {
       wx.showToast({
         icon: 'none',
         title: '请先登录',
+      })
+      return
+    }
+    this.setData({
+      loadModal: true,
+      IsComitting:true
+    })
+    console.log(SecCheckRes)
+    let FormCheck = this.checkEquip() && this.checkTime() && this.checkPurpose() && this.checkEquipCanbeBorrowOut()
+    if(!FormCheck){
+      this.setData({
+        loadModal:false,
+        IsComitting:false
       })
       return
     }
@@ -145,16 +163,20 @@ Page({
         icon:'none',
         title: '用途简介中有非法内容!',
       })
+      this.setData({
+        loadModal:false,
+        IsComitting:false
+      })
+      return
     }
-    console.log(SecCheckRes)
-    let FormCheck = this.checkEquip() && this.checkTime() && this.checkPurpose() && this.checkEquipCanbeBorrowOut()
+
     if (FormCheck) {
+      this.setData({
+        Msg1: "器材校验中"
+      })
       //向云端请求时再一次确认这些器材未被借用
       let EquipCheck = true;
       let VideoChoosed_listLength = this.data.VideoChoosed_list.length
-      this.setData({
-        loadModal: true
-      })
 	  var temp = []
       //视频团队器材校验
 	  for (var i = 0; i < VideoChoosed_listLength; i++) {
@@ -190,17 +212,20 @@ Page({
 		  //创建租借记录
           await recordModel.CreateBorrowRecord(this.data.VideoChoosed_list, this.data.PhotographyChoosed_list, this.data.StartDate, this.data.StartTime, this.data.EndDate, this.data.EndTime, this.data.Purpose, BorrowManInfo)
           this.setData({
-            loadModal: false
+            loadModal: false,
+            IsComitting:false
           })
           wx.showToast({
             title: '租借成功',
           })
           this.ClearPageInfo()
+          
           wx.switchTab({
             url: '../myrecord/myrecord',
           })
         } else {
           this.setData({
+            IsComitting:false,
             loadModal: false
           })
           wx.showToast({
