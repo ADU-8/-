@@ -31,7 +31,7 @@ Page({
     Msg2: "",
     Msg3: "",
     Msg4: "",
-    IsComitting:false
+    IsComitting: false
   },
 
   /**
@@ -133,7 +133,7 @@ Page({
   },
   async FormSubmit(e) {
     var IsComitting = this.data.IsComitting
-    if(IsComitting){
+    if (IsComitting) {
       return
     }
     if (!app.globalData.IsLogin) {
@@ -145,27 +145,27 @@ Page({
     }
     this.setData({
       loadModal: true,
-      IsComitting:true
+      IsComitting: true
     })
     console.log(SecCheckRes)
     let FormCheck = this.checkEquip() && this.checkTime() && this.checkPurpose() && this.checkEquipCanbeBorrowOut()
-    if(!FormCheck){
+    if (!FormCheck) {
       this.setData({
-        loadModal:false,
-        IsComitting:false
+        loadModal: false,
+        IsComitting: false
       })
       return
     }
     let SecCheckRes = await recordModel.checkMsgSec(this.data.Purpose);
     let SecCheck = SecCheckRes.result.code
-    if(SecCheck == "500"){
+    if (SecCheck == "500") {
       wx.showToast({
-        icon:'none',
+        icon: 'none',
         title: '用途简介中有非法内容!',
       })
       this.setData({
-        loadModal:false,
-        IsComitting:false
+        loadModal: false,
+        IsComitting: false
       })
       return
     }
@@ -175,67 +175,126 @@ Page({
         Msg1: "器材校验中"
       })
       //向云端请求时再一次确认这些器材未被借用
-      let EquipCheck = true;
+      //   let EquipCheck = true;
       let VideoChoosed_listLength = this.data.VideoChoosed_list.length
-	  var temp = []
-      //视频团队器材校验
-	  for (var i = 0; i < VideoChoosed_listLength; i++) {
-        temp.push(equipModel.CheckEquip(this.data.VideoChoosed_list[i]._id))
-      }
-	  //摄影部器材校验
+      // var temp = []
+      //   //视频团队器材校验
+      // for (var i = 0; i < VideoChoosed_listLength; i++) {
+      //     temp.push(equipModel.CheckEquip(this.data.VideoChoosed_list[i]._id))
+      //   }
+      // //摄影部器材校验
       let PhotographyChoosed_listLength = this.data.PhotographyChoosed_list.length
-      if (PhotographyChoosed_listLength != 0) {
+      //   if (PhotographyChoosed_listLength != 0) {
+      //     for (var i = 0; i < PhotographyChoosed_listLength; i++) {
+      //       temp.push(equipModel.CheckEquip(this.data.PhotographyChoosed_list[i]._id))
+      //     }
+      //   }
+      //等待校验完成进行下一步借用：
+      // Promise.all(temp).then(async res => {
+      // for (var i = 0; i < VideoChoosed_listLength + PhotographyChoosed_listLength; i++) {
+      //   EquipCheck = EquipCheck && res[i]
+      // }
+      var EquipCheck = true;
+      const BorrowManInfo = wx.getStorageSync('userInfo')
+      var SuccessVideoChoosed_list = []
+      var SuccessPhotographyChoosed_list = []
+      var FailVideoChoosed_list = []
+      var FailPhotographyChoosed_list = []
+      //借用器材
+      var that = this
+      if (EquipCheck) {
+        //借用视频团队器材
+        var temp = []
+        for (var i = 0; i < VideoChoosed_listLength; i++) {
+          temp.push(equipModel.BorrowEquip(this.data.VideoChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo))
+        }
+        //借用摄影部器材
         for (var i = 0; i < PhotographyChoosed_listLength; i++) {
-          temp.push(equipModel.CheckEquip(this.data.PhotographyChoosed_list[i]._id))
+          temp.push(equipModel.BorrowEquip(this.data.PhotographyChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo))
         }
-      }
-	  //等待校验完成进行下一步借用：
-      Promise.all(temp).then(async res => {
-        for (var i = 0; i < VideoChoosed_listLength + PhotographyChoosed_listLength; i++) {
-          EquipCheck = EquipCheck && res[i]
-        }
-        const BorrowManInfo = wx.getStorageSync('userInfo')
-        const that = this
-        //借用器材
-        if (EquipCheck) {
-		  //借用视频团队器材
+        Promise.all(temp).then(async res => {
           for (var i = 0; i < VideoChoosed_listLength; i++) {
-            equipModel.BorrowEquip(this.data.VideoChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo)
+            console.log("that.data.VideoChoosed_list[i]",that.data.VideoChoosed_list[i])
+            for (var j = 0; j < VideoChoosed_listLength + PhotographyChoosed_listLength; j++) {
+              if (that.data.VideoChoosed_list[i]._id == res[j].id) {
+                if(res[j].success){
+                  SuccessVideoChoosed_list.push(that.data.VideoChoosed_list[i])
+                }else{
+                  FailVideoChoosed_list.push(that.data.VideoChoosed_list[i])
+                }
+              }
+            }
           }
-		  //借用摄影部器材
+
           for (var i = 0; i < PhotographyChoosed_listLength; i++) {
-            equipModel.BorrowEquip(this.data.PhotographyChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo)
+            for (var j = 0; j < VideoChoosed_listLength + PhotographyChoosed_listLength; j++) {
+              if (that.data.PhotographyChoosed_list[i]._id == res[j].id) {
+                if(res[j].success){
+                  SuccessPhotographyChoosed_list.push(that.data.PhotographyChoosed_list[i])
+                }else{
+                  FailPhotographyChoosed_list.push(that.data.PhotographyChoosed_list[i])
+                }
+              }
+            }
           }
-          this.setData({
+
+          that.setData({
+            PhotographyChoosed_list:SuccessPhotographyChoosed_list,
+            VideoChoosed_list:SuccessVideoChoosed_list
+          })
+
+          that.setData({
             Msg1: "创建租借记录中",
           })
-		  //创建租借记录
-          await recordModel.CreateBorrowRecord(this.data.VideoChoosed_list, this.data.PhotographyChoosed_list, this.data.StartDate, this.data.StartTime, this.data.EndDate, this.data.EndTime, this.data.Purpose, BorrowManInfo)
-          this.setData({
-            loadModal: false,
-            IsComitting:false
-          })
-          wx.showToast({
-            title: '租借成功',
-          })
-          this.ClearPageInfo()
-          
-          wx.switchTab({
-            url: '../myrecord/myrecord',
-          })
-        } else {
-          this.setData({
-            IsComitting:false,
-            loadModal: false
-          })
-          wx.showToast({
-            icon: 'none',
-            title: '有器材已被别人抢先一步借走啦，请下拉刷新后重新进入该页面再进行选择',
-            duration: 3000
-          })
-          that.ClearPageInfo()
-        }
-      })
+          //创建租借记录
+          if (this.data.VideoChoosed_list.length != 0 || this.data.PhotographyChoosed_list != 0) {
+            await recordModel.CreateBorrowRecord(this.data.VideoChoosed_list, this.data.PhotographyChoosed_list, this.data.StartDate, this.data.StartTime, this.data.EndDate, this.data.EndTime, this.data.Purpose, BorrowManInfo)
+            this.setData({
+              loadModal: false,
+              IsComitting: false
+            })
+            if(FailVideoChoosed_list.length + FailPhotographyChoosed_list.length ==0){
+              wx.showToast({
+                title: '所有器材租借成功！',
+              })
+            }else{
+              wx.showToast({
+                icon:'none',
+                title: '部分器材租借成功！',
+              })
+            }
+            setTimeout(function(){
+              that.ClearPageInfo()
+              wx.switchTab({
+                url: '../myrecord/myrecord',
+              })
+            },1000)
+          }else{
+            this.setData({
+              loadModal: false,
+              IsComitting: false
+            })
+            wx.showToast({
+              icon:'none',
+              title: '所有器材都被别人抢先借用啦，请刷新重试',
+            })
+            that.onPullDownRefresh()
+            that.ClearPageInfo()
+          }
+        })
+        // } else {
+        //   this.setData({
+        //     IsComitting:false,
+        //     loadModal: false
+        //   })
+        //   wx.showToast({
+        //     icon: 'none',
+        //     title: '有器材已被别人抢先一步借走啦，请下拉刷新后重新进入该页面再进行选择',
+        //     duration: 3000
+        //   })
+
+      }
+      // })
     }
   },
   ClearPageInfo() {

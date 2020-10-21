@@ -41,7 +41,8 @@ Component({
     Msg1: "视频团队",
     Msg2: "1/",
     Msg3: 1,
-    Msg4: "器材归还中:"
+    Msg4: "器材归还中:",
+    IsReturning: false
   },
 
   /**
@@ -49,46 +50,77 @@ Component({
    */
   methods: {
     async ReturnRecord() {
-      this.setData({
-        loadModal: true,
-        Msg1:"器材归还中",
-        Msg2:"",
-        Msg3:"",
-        Msg4:"",
-      })
-      let temp=[]
-      temp.push(recordModel.ReturnRecord(this.data.RecordId))
-      
-      for (var i = 0; i < this.data.Video_list.length; i++) {
-        temp.push(equipModel.ReturnEquip(this.data.Video_list[i]._id))
-      }
-      for (var i = 0; i < this.data.Photo_list.length; i++) {
-        temp.push(equipModel.ReturnEquip(this.data.Photo_list[i]._id))
-      }
-      Promise.all(temp).then(async res => {
+      if (!this.data.IsReturning) {
         this.setData({
-          BackStatus: 1,
-          loadModal:false
+          IsReturning:true,
+          loadModal: true,
+          Msg1: "器材归还中",
+          Msg2: "",
+          Msg3: "",
+          Msg4: "",
         })
-        await equipModel.GetEquip("Video")
-        await equipModel.GetEquip("Photo")
-        this.triggerEvent('returnequip', {
-          test: 1
-        }, {});
-        wx.hideLoading()
-        wx.showToast({
-          title: '归还成功',
+        let temp = []
+
+        for (var i = 0; i < this.data.Video_list.length; i++) {
+          temp.push(equipModel.ReturnEquip(this.data.Video_list[i]._id))
+        }
+        for (var i = 0; i < this.data.Photo_list.length; i++) {
+          temp.push(equipModel.ReturnEquip(this.data.Photo_list[i]._id))
+        }
+        Promise.all(temp).then(async res => {
+          var returnres = true
+          for (var i = 0; i < this.data.Photo_list.length + this.data.Video_list.length; i++) {
+            console.log(res[i])
+            returnres = returnres && res[i].success
+          }
+          if (returnres) {
+            var ress = await recordModel.ReturnRecord(this.data.RecordId)
+            if (ress == 1) {
+              this.setData({
+                BackStatus: 1,
+                loadModal: false,
+                IsReturning:false
+              })
+              await equipModel.GetEquip("Video")
+              await equipModel.GetEquip("Photo")
+              this.triggerEvent('returnequip', {
+                test: 1
+              }, {});
+              wx.hideLoading()
+              wx.showToast({
+                title: '归还成功',
+              })
+              this.SendSubscribeMsg()
+            } else {
+              this.setData({
+                loadModal: false,
+                IsReturning:false
+              })
+              wx.showToast({
+                icon: 'none',
+                title: '归还记录失败',
+              })
+            }
+          } else {
+            this.setData({
+              loadModal: false,
+              IsReturning:false
+            })
+            wx.showToast({
+              icon: 'none',
+              title: '部分归还失败',
+            })
+          }
         })
-        this.SendSubscribeMsg()
-      })
+      }
     },
-    async SendSubscribeMsg(){
+    async SendSubscribeMsg() {
       var res = await subscribeMsgModel.SearchSubscribeLog_Record(this.data.RecordId)
       var num = res.result.data.length
       var userinfo = wx.getStorageSync('userInfo')
       var myPhone = userinfo.phone
-      for(var i=0;i<num;i++){
-        await subscribeMsgModel.SendSubscribeMsg(res.result.data[i].borrowMan,num,myPhone)
+      for (var i = 0; i < num; i++) {
+        await subscribeMsgModel.SendSubscribeMsg(res.result.data[i].borrowMan, num, myPhone)
       }
 
     },
@@ -98,23 +130,23 @@ Component({
       })
       var userinfo = wx.getStorageSync('userInfo')
       var myPhone = userinfo.phone
-      var res = await subscribeMsgModel.SearchSubscribeLog(myPhone,this.data.RecordId)
-      if(res.result.data.length!=0){
+      var res = await subscribeMsgModel.SearchSubscribeLog(myPhone, this.data.RecordId)
+      if (res.result.data.length != 0) {
         wx.showToast({
-          icon:'none',
+          icon: 'none',
           title: '您已订阅',
         })
-      }else{
-        await subscribeMsgModel.AddSubscribeLog(this.data.RecordId,"'"+this.data.BorrowManInfo.usertype+'_'+this.data.BorrowManInfo.name+"'",myPhone)
+      } else {
+        await subscribeMsgModel.AddSubscribeLog(this.data.RecordId, "'" + this.data.BorrowManInfo.usertype + '_' + this.data.BorrowManInfo.name + "'", myPhone)
         wx.showToast({
           title: '订阅成功',
         })
-     }
+      }
     },
-    async ForceReturnRecord(){
+    async ForceReturnRecord() {
       this.ReturnRecord()
     },
-    call: function(e) {
+    call: function (e) {
       wx.makePhoneCall({
         phoneNumber: this.data.BorrowManInfo.phone
       })

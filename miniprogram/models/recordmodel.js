@@ -39,7 +39,8 @@ class RecordModel extends HTTP {
         _id:_id
       }
     })
-    return temp.result.data
+    console.log(temp)
+    return temp.result.stats.updated
   }
 
   async GetAllRecord_NotBack(){

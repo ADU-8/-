@@ -25,9 +25,7 @@ class HTTP {
         })
       }
     })
-
   }
-
 }
 
 export {
