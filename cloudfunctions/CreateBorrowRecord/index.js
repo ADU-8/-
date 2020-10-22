@@ -18,7 +18,8 @@ exports.main = async(event, context) => {
         _openid:event.BorrowManInfo._openid,
         CreateTime:db.serverDate(),
         LastTipDate:event.StartDate,
-        LastTipTime:event.StartTime
+        LastTipTime:event.StartTime,
+        BorrowImgUrl:event.BorrowImgUrl
       }
     });
   } catch (e) {

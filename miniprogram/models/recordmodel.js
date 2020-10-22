@@ -6,7 +6,7 @@ const util = require('../util/util.js');
 const md5 = require('../util/md5.js')
 
 class RecordModel extends HTTP {
-  async CreateBorrowRecord(VideoChoosed_list, PhotographyChoosed_list, StartDate, StartTime, EndDate, EndTime, Purpose, BorrowManInfo) {
+  async CreateBorrowRecord(VideoChoosed_list, PhotographyChoosed_list, StartDate, StartTime, EndDate, EndTime, Purpose, BorrowManInfo,BorrowImgUrl) {
     return await this.request({
       name: "CreateBorrowRecord",
       data: {
@@ -17,7 +17,8 @@ class RecordModel extends HTTP {
         EndDate,
         EndTime,
         Purpose,
-        BorrowManInfo
+        BorrowManInfo,
+        BorrowImgUrl
       }
     })
   }
@@ -31,12 +32,13 @@ class RecordModel extends HTTP {
     return temp.result.data
   }
 
-  async ReturnRecord(_id){
+  async ReturnRecord(_id,ReturnImgUrl){
     console.log(_id)
     const temp = await this.request({
       name: "ReturnRecord",
       data: {
-        _id:_id
+        _id:_id,
+        ReturnImgUrl:ReturnImgUrl
       }
     })
     console.log(temp)

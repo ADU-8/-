@@ -21,21 +21,22 @@ class EquipModel extends HTTP {
     return temp.result.data
   }
 
-  async CheckEquip(_id) {
-    console.log(_id)
-    const temp = await this.request({
-      name: "CheckEquip",
-      data:{
-        _id:_id
-      }
-    })
-    console.log(temp)
-    if(temp.result.data.status == 1){
-      return true
-    }else{
-      return false
-    }
-  }
+
+  // async CheckEquip(_id) {
+  //   console.log(_id)
+  //   const temp = await this.request({
+  //     name: "CheckEquip",
+  //     data:{
+  //       _id:_id
+  //     }
+  //   })
+  //   console.log(temp)
+  //   if(temp.result.data.status == 1){
+  //     return true
+  //   }else{
+  //     return false
+  //   }
+  // }
 
   async BorrowEquip(_id,EndDate,EndTime,BorrowManInfo) {
     console.log(_id,EndDate,EndTime,BorrowManInfo)
@@ -51,6 +52,18 @@ class EquipModel extends HTTP {
     console.log(temp)
     return temp.result
   }
+  //回滚数据
+  async RollBackEquip(_id){
+    const temp = await this.request({
+      name: "RollBackEquip",
+      data:{
+        _id:_id,
+      }
+    })
+    console.log(temp)
+    return temp
+  }
+
   async ReturnEquip(_id) {
     console.log(_id)
     const temp = await this.request({

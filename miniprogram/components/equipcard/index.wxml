@@ -1,29 +1,37 @@
 <!--components/equipcard/equipcard.wxml-->
-<view class="bg-white margin-bottom margin-left margin-right margin-top padding-sm radius shadow " wx-if="{{!BackStatus}}">
-	<view class="padding-left padding-bottom" style="font-size: 36rpx; font-weight: bold;">
-		<view class="text-cut">{{equipmentname}}</view>
-	</view>
+<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} margin-bottom margin-left margin-right margin-top radius shadow " wx-if="{{!BackStatus}}">
+	<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
+		<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
+			<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
+				<view class="bg-white padding-sm shadow shadow-warp">
+					<view class="padding-left padding-bottom" style="font-size: 36rpx; font-weight: bold;">
+						<view class="text-cut">{{equipmentname}}</view>
+					</view>
 
-	<view class="margin-left">
-		<view class="cu-tag bg-blue light sm round">{{type=='Video'?'视频团队':'摄影部'}}</view>
-	</view>
+					<view class="margin-left">
+						<view class="cu-tag bg-blue light sm round">{{type=='Video'?'视频团队':'摄影部'}}</view>
+					</view>
 
-	<view class="content">
-		<view style="margin-top: 20rpx; width: 85vw;">
-			<view class="text-content">
-				<view><text class="cuIcon-right margin-right margin-left"></text>{{status==1?'未出借':'已出借'}}</view>
-				<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name != undefined}}"><text class="cuIcon-time margin-right margin-left"></text>最近借用：{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}} </view>
-				<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name == undefined}}"><text class="cuIcon-friend margin-right margin-left"></text>最近借用：暂无</view>
-				<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name != undefined}}" bindtap="call" ><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
-					<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name == undefined}}" bindtap="call" ><text class="cuIcon-dianhua margin-right margin-left"></text>暂无</view>
-				<view wx-if="{{status==0}}"><text class="cuIcon-time margin-right margin-left"></text>{{backdate}} {{backtime}}</view>
-        <view wx-if="{{status==0}}"><text class="cuIcon-friend margin-right margin-left"></text>当前借用：{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}}</view>
-				<view wx-if="{{status==0}}" bindtap="call" ><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
-			</view>
-		</view>
-		<!-- <view wx-if="{{cardType=='admin'}}" style="margin-left:420rpx;">
+					<view class="content">
+						<view style="margin-top: 20rpx; width: 85vw;">
+							<view class="text-content">
+								<view><text class="cuIcon-right margin-right margin-left"></text>{{status==1?'未出借':'已出借'}}</view>
+								<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name != undefined}}"><text class="cuIcon-time margin-right margin-left"></text>最近借用：{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}} </view>
+								<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name == undefined}}"><text class="cuIcon-friend margin-right margin-left"></text>最近借用：暂无</view>
+								<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name != undefined}}" bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
+								<view wx-if="{{status==1 && cardType=='admin' && BorrowManInfo.name == undefined}}" bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>暂无</view>
+								<view wx-if="{{status==0}}"><text class="cuIcon-time margin-right margin-left"></text>{{backdate}} {{backtime}}</view>
+								<view wx-if="{{status==0}}"><text class="cuIcon-friend margin-right margin-left"></text>当前借用：{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}}</view>
+								<view wx-if="{{status==0}}" bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
+							</view>
+						</view>
+						<!-- <view wx-if="{{cardType=='admin'}}" style="margin-left:420rpx;">
 			<image src="./images/up.png" style="width:60rpx;height:60rpx;margin-right:60rpx;" bindtap="Up"></image>
 			<image src="./images/down.png" style="width:60rpx;height:60rpx;" bindtap="Down"></image>
 		</view> -->
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </view>

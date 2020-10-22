@@ -12,7 +12,7 @@
 
 <view class="but">
 	<button class="cu-btn bg-gradual-blue margin-bottom" form-type="submit" style="font-size:35rpx;" catchtap="showMultiple_video">视频团队器材</button>
-		<button class="cu-btn bg-gradual-purple margin-bottom" form-type="submit" style="font-size:35rpx;" catchtap="showMultiple_photo">摄影部器材</button>
+	<button class="cu-btn bg-gradual-purple margin-bottom" form-type="submit" style="font-size:35rpx;" catchtap="showMultiple_photo">摄影部器材</button>
 </view>
 
 <multiple id="multiple_video" bind:multipleCancel="multipleCancel_video" bind:multipleConfirm="multipleConfirm_video" multipleContent='当前可借器材(视频团队)' multiple_list="{{Video_list}}">
@@ -47,7 +47,7 @@
 			<text class="text-grey">{{item.equipmentname}}</text>
 		</view>
 	</view>
-	
+
 </view>
 
 <view class="cu-list menu card-menu margin-bottom">
@@ -57,7 +57,7 @@
 			<text class="text-grey">已选择器材（摄影部）:</text>
 		</view>
 	</view>
-		<view class="cu-item" wx-if="{{PhotographyChoosed_list.length==0}}">
+	<view class="cu-item" wx-if="{{PhotographyChoosed_list.length==0}}">
 		<view class="content">
 			<text class="cuIcon-right text-grey"></text>
 			<text class="text-grey">暂无</text>
@@ -119,14 +119,40 @@
 		</view>
 	</view>
 
+	<view class="cu-card case">
+		<view class="cu-item shadow" style="margin-top: 0;">
+			<view class="cu-bar bg-white">
+				<view class="action">
+					器材借用前照片上传
+				</view>
+				<view class="action">
+					{{Images.length}}/4
+				</view>
+			</view>
+			<view class="cu-form-group margin-bottom">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" bindtap="HandleImagePreview" data-url="{{Images[index]}}">
+						<image src='{{Images[index]}}' mode='aspectFill'></image>
+						<view class="cu-tag bg-red" catchtap="RemoveImage" data-index="{{index}}">
+							<text class="cuIcon-close"></text>
+						</view>
+					</view>
+					<view class="solids" bindtap="chooseImage" wx:if="{{Images.length<4}}">
+						<text class="cuIcon-cameraadd"></text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
 	<view class="padding-lr padding-bottom flex flex-direction">
 		<button class="bt cu-btn bg-blue margin-tb-sm lg" form-type="submit">提交</button>
 	</view>
 </form>
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
-  <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
-  <view class='gray-text'>{{Msg1}}</view>
+	<!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+	<view class='gray-text'>{{Msg1}}</view>
 	<view class='gray-text'>{{Msg4}}</view>
 	<view class='gray-text'>{{Msg2}}{{Msg3}}</view>
 </view>

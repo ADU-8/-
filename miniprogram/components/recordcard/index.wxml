@@ -29,7 +29,7 @@
 				</view>
 
 			</view>
-			<view class="bg-white margin-bottom" style="margin-left:430rpx;" bindtap="ReturnRecord" wx-if="{{CardType=='MyRecord'}}">
+			<view class="bg-white margin-bottom" style="margin-left:430rpx;" bindtap="ReturnRecord2" wx-if="{{CardType=='MyRecord'}}">
 				<button class="bt cu-btn line-orange">
 					<text class="cuIcon-upload"></text>一键归还</button>
 			</view>
@@ -52,4 +52,41 @@
 	<view class='gray-text'>{{Msg1}}</view>
 	<view class='gray-text'>{{Msg4}}</view>
 	<view class='gray-text'>{{Msg2}}{{Msg3}}</view>
+</view>
+
+<view class='cu-modal show' wx:if="{{loadModal2}}">
+	<!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+	<view class="cu-dialog">
+		<view class="cu-card case">
+			<view class="cu-item shadow" style="margin-top: 0;">
+				<view class="cu-bar bg-white">
+					<view class="action">
+						器材归还时照片上传
+					</view>
+					<view class="action">
+						{{Images.length}}/4
+					</view>
+				</view>
+				<view class="cu-form-group margin-bottom">
+					<view class="grid col-4 grid-square flex-sub">
+						<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" bindtap="HandleImagePreview" data-url="{{Images[index]}}">
+							<image src='{{Images[index]}}' mode='aspectFill'></image>
+							<view class="cu-tag bg-red" catchtap="RemoveImage" data-index="{{index}}">
+								<text class="cuIcon-close"></text>
+							</view>
+						</view>
+						<view class="solids" bindtap="chooseImage" wx:if="{{Images.length<4}}">
+							<text class="cuIcon-cameraadd"></text>
+						</view>
+					</view>
+				</view>
+				<view style="margin-left:45%;">
+					<button class="bt cu-btn line-orange" bindtap="ReturnRecord">
+					<text class="cuIcon-upload"></text>确认</button>
+					<button class="bt cu-btn line-orange"  style="margin-left:5%;" bindtap="HideModal2">
+					<text class="cuIcon-upload"></text>取消</button>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

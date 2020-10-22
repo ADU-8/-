@@ -15,7 +15,7 @@ const userModel = new UserModel()
 const equipModel = new EquipModel()
 Page({
   data: {
-    Version: "1.4.2",
+    Version: "1.5.0",
     IsReady: 0,
     userInfo: {},
     IsLogin: 0,

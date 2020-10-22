@@ -33,10 +33,9 @@
 	<view class="cu-dialog">
 		<view class="bg-img">
 			<view style="margin-top:20rpx;"> <text class="text-blue" style="font-size:40rpx;">V {{Version}}版本更新</text></view>
-			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、优化部分按钮响应区域过小的问题 </text></view>
-			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、新增客服会话，云调用消息推送功能 </text></view>
-			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">3、首页右侧新增使用指南视频 </text></view>
-			<view style="width:70%;margin-left:15%;margin-top:5%;margin-bottom:5%;text-align:left;"><text space="emsp">4、后台器材管理处新增智能搜索功能</text></view>
+			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、增加器材查询界面已出借/未出借的颜色标识 </text></view>
+			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、借用与归还器材时需要拍摄器材图片来以便器材追责 </text></view>
+			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">3、器材借用函数性能优化，避免了两人同时(1s)内借用同一器材时会出现器材呗登记两次的问题。 </text></view>
 		</view>
 		<view class="cu-bar bg-white">
 			<view class="action margin-0 flex-sub  solid-left border" bindtap="HideModal2">我知道了</view>

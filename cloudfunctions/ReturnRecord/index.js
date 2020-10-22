@@ -8,7 +8,8 @@ exports.main = async(event, context) => {
   try {
     return await db.collection("newrecord").doc(event._id).update({
       data: {
-        BackStatus:1
+        BackStatus:1,
+        ReturnImgUrl:event.ReturnImgUrl
       }
     })
   } catch (e) {
