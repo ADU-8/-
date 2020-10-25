@@ -1,34 +1,80 @@
 <view wx-if="{{IsLoading}}" class="cu-load loading"></view>
-	<radio-group class="block margin-left margin-bottom" bindchange='radiochange'>
-		<view>
-			<radio class="blue margin-left-sm" value="weekrecord" checked="{{CheckItem==1}}"></radio><text>一周内记录</text>
-			<radio class="red margin-left-sm" value="monthrecord"></radio><text>一月内记录</text>
-			<radio class="green margin-left-sm" value="allrecord"></radio><text>所有记录</text>
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">精确搜索</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
 		</view>
-	</radio-group>
+	</view>
+</view>
 
-	<view wx:for="{{weekrecord}}" wx-if="{{CheckItem==1}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
-		<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" />
+<view class="cu-card case">
+	<view class="cu-item shadow" style="margin-top: 0;">
+		<view class="picker_group margin-bottom-sm margin-top-sm">
+			<picker mode="date" value="{{date}}" end="{{date2}}" bindchange="bindDateChange">
+				<view class="picker">
+					{{date}}
+				</view>
+			</picker>
+			至
+			<picker mode="date" value="{{date2}}" start="{{date}}" end="2050-01-01" bindchange="bindDateChange2">
+				<view class="picker">
+					{{date2}}
+				</view>
+			</picker>
+			<button class="bt cu-btn line-blue" style="margin-left:20rpx;" bindtap="SearchAccurate">
+				<text class="cuIcon-search"></text>搜索</button>
+		</view>
 	</view>
 
-	<view wx-if="{{CheckItem==1&&weekrecord.length==0}}" class="blank">
-		暂无相关记录
-	</view>
+</view>
 
-	<view wx:for="{{monthrecord}}" wx-if="{{CheckItem==2}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
-		<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" />
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xxl text-bold text-blue">快速查询</text>
+				<text class="bg-blue" style="width:8rem"></text>
+			</view>
+		</view>
 	</view>
+</view>
+<view class="cu-card case" style="margin-top:-20rpx;">
+	<view class="cu-item shadow">
+		<radio-group class="block margin-left margin-bottom margin-top" bindchange='radiochange'>
+			<view>
+				<radio class="blue margin-left-sm" value="weekrecord" checked="{{CheckItem==1}}"></radio><text>一周内记录</text>
+				<radio class="red margin-left-sm" value="monthrecord"></radio><text>一月内记录</text>
+				<radio class="green margin-left-sm" value="allrecord"></radio><text>所有记录</text>
+			</view>
+		</radio-group>
+			</view>
+</view>
 
-	<view wx-if="{{CheckItem==2&&monthrecord.length==0}}" class="blank">
-		暂无相关记录
-	</view>
-	<view wx:for="{{allrecord}}" wx-if="{{CheckItem==3}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
-		<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" />
-	</view>
-	<view wx-if="{{IsLoad}}" class="cu-load loading"></view>
-	<view wx-if="{{IsLoadweekAll && CheckItem==1}}" class="cu-load over"></view>
-	<view wx-if="{{IsLoadmonthAll && CheckItem==2}}" class="cu-load over"></view>
-	<view wx-if="{{IsLoadallAll && CheckItem==3}}" class="cu-load over"></view>
-	<view wx-if="{{CheckItem==3&&allrecord.length==0}}" class="blank">
-		暂无相关记录
-	</view>
+<view wx:for="{{weekrecord}}" wx-if="{{CheckItem==1}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" AdminImages="{{item.BorrowImgUrl}}" AdminReturnImages="{{item.ReturnImgUrl}}" />
+</view>
+
+<view wx-if="{{CheckItem==1&&weekrecord.length==0}}" class="blank">
+	暂无相关记录
+</view>
+
+<view wx:for="{{monthrecord}}" wx-if="{{CheckItem==2}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" AdminImages="{{item.BorrowImgUrl}}" AdminReturnImages="{{item.ReturnImgUrl}}" />
+</view>
+
+<view wx-if="{{CheckItem==2&&monthrecord.length==0}}" class="blank">
+	暂无相关记录
+</view>
+<view wx:for="{{allrecord}}" wx-if="{{CheckItem==3}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+	<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" AdminImages="{{item.BorrowImgUrl}}" AdminReturnImages="{{item.ReturnImgUrl}}" />
+</view>
+<view wx-if="{{IsLoad}}" class="cu-load loading"></view>
+<view wx-if="{{IsLoadweekAll && CheckItem==1}}" class="cu-load over"></view>
+<view wx-if="{{IsLoadmonthAll && CheckItem==2}}" class="cu-load over"></view>
+<view wx-if="{{IsLoadallAll && CheckItem==3}}" class="cu-load over"></view>
+<view wx-if="{{CheckItem==3&&allrecord.length==0}}" class="blank">
+	暂无相关记录
+</view>

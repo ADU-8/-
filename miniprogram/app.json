@@ -9,7 +9,8 @@
     "pages/admin/admin",
     "pages/alluserinfo/alluserinfo",
     "pages/deleteequip/deleteequip",
-    "pages/updatelog/updatelog"
+    "pages/updatelog/updatelog",
+    "pages/accuratesearch/accuratesearch"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

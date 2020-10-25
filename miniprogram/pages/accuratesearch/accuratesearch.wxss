@@ -1,0 +1,36 @@
+/* miniprogram/pages/accuratesearch/accuratesearch.wxss */
+
+.scroll-views {
+  height: 100%;
+}
+
+.blank {
+  color: lightgray;
+  text-align: center;
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+  top: 50vh;
+  font-size:35rpx;
+}
+
+
+.picker_group {
+  line-height: 85rpx;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #888;
+  border-bottom: 1rpx solid #efefef;
+
+}
+
+.picker_group .picker {
+  /* background-color: yellow; */
+  color: #0081ff;
+  height: 55rpx;
+  line-height: 55rpx;
+  border: 1rpx solid #0054a7;
+  border-radius: 10rpx;
+}

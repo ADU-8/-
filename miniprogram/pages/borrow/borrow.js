@@ -37,7 +37,7 @@ Page({
     Msg3: "",
     Msg4: "",
     IsComitting: false,
-    Images: ""
+    Images: []
   },
 
   /**
@@ -472,13 +472,33 @@ Page({
   chooseImage: function () {
     var that = this;
     // 选择图片
+    
+    // wx.chooseVideo({
+    //   sizeType: ['compressed'],
+    //   sourceType: ['album', 'camera'],
+    //   success: function (res) {
+    //     console.log("res", res)
+    //     var images = []
+    //     images.push(res.tempFilePath);
+    //     console.log("image", images)
+    //     that.setData({
+    //       Images: images
+    //     })
+    //     console.log("image2", that.data.images)
+    //   },
+    //   fail: e => {
+    //     console.error(e)
+    //   }
+    // })
+    var len = 4 - this.data.Images
     wx.chooseImage({
-      count: 4,
+      count:len,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
         console.log("res", res)
-        var images = []
+        var images = that.data.Images
+        console.log(images)
         res.tempFilePaths.forEach(function (item, index) {
           console.log("item", item);
           images.push(item);
@@ -495,14 +515,17 @@ Page({
     })
   },
   RemoveImage(e) {
-    var index = e.target.dataset.index;
-    this.data.Images.splice(index, 1);
+    var id = e.currentTarget.dataset.id;
+    console.log(this.data.Images)
+    this.data.Images.splice(id, 1);
+    console.log(this.data.Images)
     this.setData({
       Images: this.data.Images
     })
   },
   HandleImagePreview(e) {
-    const index = e.target.dataset.index
+    console.log("Handle",e)
+    const index = e.currentTarget.dataset.index
     const images = this.data.Images
     wx.previewImage({
       current: images[index], //当前预览的图片

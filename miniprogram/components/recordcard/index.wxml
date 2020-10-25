@@ -27,6 +27,31 @@
 				<view wx:for="{{Photo_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
 					<view><text class="margin-right margin-left"></text>{{index+1}}、 {{item.equipmentname}}</view>
 				</view>
+					<view class=" margin-right margin-left" style="width:10rpx;"></view>
+
+				<view wx-if="{{CardType=='AdminRecord'}}"><text class="cuIcon-pic margin-right margin-left margin-bottom"></text>借用时图片</view>
+				<view class="cu-form-group margin-bottom-sm margin-top-sm" wx-if="{{CardType=='AdminRecord'}}">
+					<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminImages.length!=0}}">
+						<view class="bg-img" wx:for="{{AdminImages}}" wx:key="{{index}}" data-url="{{AdminImages[index]}}">
+							<image src='{{AdminImages[index]}}' mode='aspectFill' bindtap="HandleAdminImagePreview" data-index="{{index}}"></image>
+						</view>
+					</view>
+						<view wx-if="{{AdminImages.length==0}}" style="margin-left:35%;">
+							暂无图片信息
+						</view>
+				</view>
+				
+				<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-pic margin-right margin-left"></text>归还时图片</view>
+				<view class="cu-form-group margin-bottom-sm margin-top-sm" wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}">
+					<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminReturnImages.length!=0}}">
+						<view class="bg-img" wx:for="{{AdminReturnImages}}" wx:key="{{index}}" data-url="{{AdminReturnImages[index]}}" >
+							<image src='{{AdminReturnImages[index]}}' mode='aspectFill' bindtap="HandleAdminReturnImagePreview" data-index="{{index}}"></image>
+						</view>
+					</view>
+						<view wx-if="{{AdminReturnImages.length==0}}" style="margin-left:35%;">
+							暂无图片信息
+						</view>
+				</view>
 
 			</view>
 			<view class="bg-white margin-bottom" style="margin-left:430rpx;" bindtap="ReturnRecord2" wx-if="{{CardType=='MyRecord'}}">
@@ -69,8 +94,8 @@
 				</view>
 				<view class="cu-form-group margin-bottom">
 					<view class="grid col-4 grid-square flex-sub">
-						<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" bindtap="HandleImagePreview" data-url="{{Images[index]}}">
-							<image src='{{Images[index]}}' mode='aspectFill'></image>
+						<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" data-url="{{Images[index]}}" data-id="{{index}}">
+							<image src='{{Images[index]}}' mode='aspectFill' style="right:0rpx;" bindtap="HandleImagePreview" data-index="{{index}}"></image>
 							<view class="cu-tag bg-red" catchtap="RemoveImage" data-index="{{index}}">
 								<text class="cuIcon-close"></text>
 							</view>
@@ -82,9 +107,9 @@
 				</view>
 				<view style="margin-left:45%;">
 					<button class="bt cu-btn line-orange" bindtap="ReturnRecord">
-					<text class="cuIcon-upload"></text>确认</button>
-					<button class="bt cu-btn line-orange"  style="margin-left:5%;" bindtap="HideModal2">
-					<text class="cuIcon-upload"></text>取消</button>
+						<text class="cuIcon-upload"></text>确认</button>
+					<button class="bt cu-btn line-orange" style="margin-left:5%;" bindtap="HideModal2">
+						<text class="cuIcon-upload"></text>取消</button>
 				</view>
 			</view>
 		</view>

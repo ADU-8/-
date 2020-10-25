@@ -106,10 +106,9 @@
 					<view>{{EndTime}}</view>
 				</picker>
 			</view>
-
-
 		</view>
 	</view>
+	
 	<view class="cu-card case">
 		<view class="cu-item shadow" style="margin-top: 0;">
 			<view class="cu-form-group align-start">
@@ -131,9 +130,9 @@
 			</view>
 			<view class="cu-form-group margin-bottom">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" bindtap="HandleImagePreview" data-url="{{Images[index]}}">
-						<image src='{{Images[index]}}' mode='aspectFill'></image>
-						<view class="cu-tag bg-red" catchtap="RemoveImage" data-index="{{index}}">
+					<view class="bg-img" wx:for="{{Images}}" wx:key="{{index}}" data-url="{{Images[index]}}" >
+						<image src='{{Images[index]}}' mode='aspectFill' bindtap="HandleImagePreview" data-index="{{index}}"></image>
+						<view class="cu-tag bg-red" catchtap="RemoveImage" data-id="{{index}}">
 							<text class="cuIcon-close"></text>
 						</view>
 					</view>

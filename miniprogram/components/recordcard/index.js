@@ -35,6 +35,8 @@ Component({
       type: String,
       value: 'MyRecord'
     },
+    AdminImages:Array,
+    AdminReturnImages:Array
   },
 
   /**
@@ -48,7 +50,7 @@ Component({
     Msg4: "器材归还中:",
     IsReturning: false,
     loadModal2: false,
-    Images: []
+    Images: [],
   },
 
   /**
@@ -243,13 +245,14 @@ Component({
     chooseImage: function () {
       var that = this;
       // 选择图片
+      var len = 4-this.data.Images
       wx.chooseImage({
-        count: 4,
+        count: len,
         sizeType: ['compressed'],
         sourceType: ['album', 'camera'],
         success: function (res) {
           console.log("res", res)
-          var images = []
+          var images = that.data.Images
           res.tempFilePaths.forEach(function (item, index) {
             console.log("item", item);
             images.push(item);
@@ -266,7 +269,7 @@ Component({
       })
     },
     RemoveImage(e) {
-      var index = e.target.dataset.index;
+      var index = e.currentTarget.dataset.index;
       this.data.Images.splice(index, 1);
       this.setData({
         Images: this.data.Images
@@ -284,6 +287,23 @@ Component({
       this.setData({
         loadModal2:false
       })
-    }
+    },
+    HandleAdminImagePreview(e) {
+      const index = e.target.dataset.index
+      const images = this.data.AdminImages
+      wx.previewImage({
+        current: images[index], //当前预览的图片
+        urls: images, //所有要预览的图片
+      })
+    },
+    HandleAdminReturnImagePreview(e) {
+      console.log(e)
+      const index = e.target.dataset.index
+      const images = this.data.AdminReturnImages
+      wx.previewImage({
+        current: images[index], //当前预览的图片
+        urls: images, //所有要预览的图片
+      })
+    },
   }
 })

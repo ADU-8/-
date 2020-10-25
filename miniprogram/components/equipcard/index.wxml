@@ -1,8 +1,8 @@
 <!--components/equipcard/equipcard.wxml-->
-<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} margin-bottom margin-left margin-right margin-top radius shadow " wx-if="{{!BackStatus}}">
-	<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
-		<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
-			<view class="{{status==1?'bg-blueShadow':'bg-purpleShadow'}} radius shadow">
+<view class="{{status==1?'bg-blueShadow':'bg-orangeShadow'}} margin-bottom margin-left margin-right margin-top radius shadow " wx-if="{{!BackStatus}}">
+	<view class="{{status==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
+		<view class="{{status==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
+			<view class="{{status==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
 				<view class="bg-white padding-sm shadow shadow-warp">
 					<view class="padding-left padding-bottom" style="font-size: 36rpx; font-weight: bold;">
 						<view class="text-cut">{{equipmentname}}</view>

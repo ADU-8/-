@@ -35,9 +35,24 @@ Page({
     IsLoadweekAll: false,
     IsLoadmonthAll: false,
     IsLoadallAll: false,
-    IsLoading:true
-  },
+    IsLoading:true,
 
+    date: '',//默认起始时间  
+    date2: '',//默认结束时间 
+  },
+  bindDateChange(e) {
+    let that = this;
+    console.log(e.detail.value)
+    that.setData({
+      date: e.detail.value,
+    })
+  },
+  bindDateChange2(e) {
+    let that = this;
+    that.setData({
+      date2: e.detail.value,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -46,9 +61,12 @@ Page({
     let allrecord = recordModel.GetRecord_Some(0, 10, "all")
     let weekrecord = recordModel.GetRecord_Some(0, 10, "week")
     let monthrecord = recordModel.GetRecord_Some(0, 10, "month")
+    var time = util.formatTime(new Date());
     Promise.all([allrecord, weekrecord, monthrecord]).then(async res => {
       var that = this
       that.setData({
+        date2: time[0],
+        date: time[0],
         usertype,
         weekrecord: await weekrecord,
         monthrecord: await monthrecord,
@@ -216,5 +234,10 @@ Page({
         allrecord: await allrecord
       })
     })
+  },
+  SearchAccurate(){
+   wx.navigateTo({
+     url: '../accuratesearch/accuratesearch?date='+this.data.date+'&date2='+this.data.date2,
+   })
   }
 })

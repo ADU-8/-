@@ -1,0 +1,38 @@
+<!--miniprogram/pages/accuratesearch/accuratesearch.wxml-->
+
+<view wx-if="{{IsLoading}}" class="cu-load loading"></view>
+
+<view class="cu-card case">
+	<view class="cu-item shadow">
+		<view class="cu-bar bg-white">
+			<view class="action sub-title">
+				<text class="text-xl text-bold text-blue">搜索结果</text>
+				<view class="picker_group margin-left-sm margin-top-sm margin-bottom-sm">
+					<view class="picker margin-right-sm padding-left-sm padding-right-sm">
+						{{date}}
+					</view>
+					至
+					<view class="picker margin-left-sm padding-left-sm padding-right-sm">
+						{{date2}}
+					</view>
+				</view>
+			</view>
+
+		</view>
+	</view>
+</view>
+
+<scroll-view scroll-y style="height:{{scrollHeight}}px;" bindscrolltolower='scrollToLower'>
+	<view>
+		<view wx:for="{{record}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+			<v-recordcard bind:returnequip="ReturnEquip" RecordId="{{item._id}}" BackStatus="{{item.BackStatus}}" StartDate="{{item.StartDate}}" StartTime="{{item.StartTime}}" EndDate="{{item.EndDate}}" EndTime="{{item.EndTime}}" Purpose="{{item.Purpose}}" type="{{item.BorrowManInfo.usertype}}" BorrowManInfo="{{item.BorrowManInfo}}" Video_list="{{item.VideoChoosed_list}}" Photo_list="{{item.PhotographyChoosed_list}}" CardType="AdminRecord" AdminImages="{{item.BorrowImgUrl}}" AdminReturnImages="{{item.ReturnImgUrl}}" />
+		</view>
+
+		<view wx-if="{{record.length==0}}" class="blank">
+			暂无相关记录
+		</view>
+
+		<view wx-if="{{IsLoad}}" class="cu-load loading"></view>
+		<view wx-if="{{IsLoadAll}}" class="cu-load over"></view>
+	</view>
+</scroll-view>
