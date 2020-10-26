@@ -36,6 +36,7 @@
 			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">1、增加器材查询界面已出借/未出借的颜色标识 </text></view>
 			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">2、借用与归还器材时需要拍摄器材图片来以便器材追责 </text></view>
 			<view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;"><text space="emsp">3、器材借用函数性能优化，避免了两人同时(1s)内借用同一器材时会出现器材呗登记两次的问题。 </text></view>
+	    <view style="width:70%;margin-left:15%;margin-top:5%;text-align:left;margin-bottom:10rpx;"><text space="emsp">4、后台管理系统记录查询处可以依据记录借用开始的具体日期段进行精确搜索了。 </text></view>
 		</view>
 		<view class="cu-bar bg-white">
 			<view class="action margin-0 flex-sub  solid-left border" bindtap="HideModal2">我知道了</view>

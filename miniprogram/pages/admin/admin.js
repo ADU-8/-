@@ -62,11 +62,13 @@ Page({
     let weekrecord = recordModel.GetRecord_Some(0, 10, "week")
     let monthrecord = recordModel.GetRecord_Some(0, 10, "month")
     var time = util.formatTime(new Date());
+    this.setData({
+      date2: time[0],
+      date: time[0],
+    })
     Promise.all([allrecord, weekrecord, monthrecord]).then(async res => {
       var that = this
       that.setData({
-        date2: time[0],
-        date: time[0],
         usertype,
         weekrecord: await weekrecord,
         monthrecord: await monthrecord,
