@@ -165,17 +165,7 @@ Page({
       })
       return
     }
-    if(this.data.Images.length == 0){
-      this.setData({
-        loadModal: false,
-        IsComitting: false
-      })
-      wx.showToast({
-        icon:'none',
-        title: '请先拍摄器材照片',
-      })
-      return
-    }
+
     //做内容安全校验
     let SecCheckRes = await recordModel.checkMsgSec(this.data.Purpose);
     let SecCheck = SecCheckRes.result.code
@@ -216,7 +206,7 @@ Page({
         temp.push(equipModel.BorrowEquip(this.data.PhotographyChoosed_list[i]._id, that.data.EndDate, that.data.EndTime, BorrowManInfo))
       }
       //若所有Promise均已返回，修改
-      Promise.all(temp).then(async res => {    //第一层
+      Promise.all(temp).then(async res => { //第一层
         //获取器材借用结果
         for (var i = 0; i < VideoChoosed_listLength; i++) {
           console.log("that.data.VideoChoosed_list[i]", that.data.VideoChoosed_list[i])
@@ -248,28 +238,32 @@ Page({
           VideoChoosed_list: SuccessVideoChoosed_list
         })
         //创建记录
-        that.setData({
-          Msg1: "上传器材图片中",
-        })
+        if (that.data.Images.length != 0) {
+          that.setData({
+            Msg1: "上传器材图片中",
+          })
+        }
         //创建租借记录
         if (this.data.VideoChoosed_list.length != 0 || this.data.PhotographyChoosed_list != 0) {
           var temp = []
           //如果有器材借用成功，上传相应图片
-          that.data.Images.forEach(function(value, index) {
-            const filePath = value;
-            const userid = wx.getStorageSync('userInfo')._openid
-            const cloudPath = userid +'/'+md5.hex_md5(that.data.EndDate+that.data.StartDate+that.data.EndTime) + '/image' + index + filePath.match(/\.[^.]+?$/);
-            console.log("cloudPath", cloudPath)
-            console.log("filePath", filePath)
-            temp.push(fileModel.uploadpic(cloudPath,filePath))
-          })
+          if (that.data.Images.length != 0) {
+            that.data.Images.forEach(function (value, index) {
+              const filePath = value;
+              const userid = wx.getStorageSync('userInfo')._openid
+              const cloudPath = userid + '/' + md5.hex_md5(that.data.EndDate + that.data.StartDate + that.data.EndTime) + '/image' + index + filePath.match(/\.[^.]+?$/);
+              console.log("cloudPath", cloudPath)
+              console.log("filePath", filePath)
+              temp.push(fileModel.uploadpic(cloudPath, filePath))
+            })
+          }
           var imgurl = []
           //等待所有图片上传完成后进行下一步操作
-          Promise.all(temp).then(async res=>{
+          Promise.all(temp).then(async res => {
             //第二层等待Promise，获得所有图片上传的结果及url
-            for(var i =0;i<temp.length;i++){
-              console.log(i,res[i])
-              if(res[i].statusCode == 200){ //成功
+            for (var i = 0; i < temp.length; i++) {
+              console.log(i, res[i])
+              if (res[i].statusCode == 200) { //成功
                 imgurl.push(res[i].fileID)
               }
             }
@@ -278,7 +272,7 @@ Page({
             that.setData({
               Msg1: "新增借用记录中",
             })
-            await recordModel.CreateBorrowRecord(that.data.VideoChoosed_list, that.data.PhotographyChoosed_list, that.data.StartDate, that.data.StartTime, that.data.EndDate, that.data.EndTime, that.data.Purpose, BorrowManInfo,imgurl)
+            await recordModel.CreateBorrowRecord(that.data.VideoChoosed_list, that.data.PhotographyChoosed_list, that.data.StartDate, that.data.StartTime, that.data.EndDate, that.data.EndTime, that.data.Purpose, BorrowManInfo, imgurl)
             console.log("inner2")
             this.setData({
               loadModal: false,
@@ -324,7 +318,7 @@ Page({
       VideoChoosed_list: [],
       PhotographyChoosed_list: [],
       Purpose: "",
-      Images:[]
+      Images: []
     })
   },
   checkEquip: function () {
@@ -472,7 +466,7 @@ Page({
   chooseImage: function () {
     var that = this;
     // 选择图片
-    
+
     // wx.chooseVideo({
     //   sizeType: ['compressed'],
     //   sourceType: ['album', 'camera'],
@@ -492,7 +486,7 @@ Page({
     // })
     var len = 4 - this.data.Images
     wx.chooseImage({
-      count:len,
+      count: len,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
@@ -524,7 +518,7 @@ Page({
     })
   },
   HandleImagePreview(e) {
-    console.log("Handle",e)
+    console.log("Handle", e)
     const index = e.currentTarget.dataset.index
     const images = this.data.Images
     wx.previewImage({
