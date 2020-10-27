@@ -1,75 +1,82 @@
 <!--components/recordcard/index.wxml-->
-<view class="bg-white margin-bottom margin-left margin-right padding-sm radius shadow " wx-if="{{!BackStatus || CardType=='AdminRecord'}}">
-	<view class="padding" style="font-size: 36rpx; font-weight: bold;">
-		<view class="text-cut">{{Purpose}}</view>
-	</view>
+<view class="{{BackStatus==1?'bg-blueShadow':'bg-orangeShadow'}} margin-bottom margin-left margin-right radius shadow " wx-if="{{!BackStatus || CardType=='AdminRecord'}}">
+	<view class="{{BackStatus==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
+		<view class="{{BackStatus==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
+			<view class="{{BackStatus==1?'bg-blueShadow':'bg-orangeShadow'}} radius shadow">
+				<view class="bg-white padding-sm shadow shadow-warp">
+					<view class="padding" style="font-size: 36rpx; font-weight: bold;">
+						<view class="text-cut">{{Purpose}}</view>
+					</view>
 
-	<view class="margin-left">
-		<view class="cu-tag bg-blue light sm round">{{type}}</view>
-	</view>
+					<view class="margin-left">
+						<view class="cu-tag bg-blue light sm round">{{type}}</view>
+					</view>
 
-	<view class="content">
-		<view style="margin-top: 10rpx; width: 85vw;">
-			<view class="text-content">
-				<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-check margin-right margin-left"></text>已归还</view>
-				<view wx-if="{{CardType=='AdminRecord' && BackStatus!='1'}}"><text class="cuIcon-close margin-right margin-left"></text>未归还</view>
-				<view><text class="cuIcon-time margin-right margin-left"></text>{{StartDate}} {{StartTime}} ~ {{EndDate}} {{EndTime}}</view>
-				<view><text class="cuIcon-friend margin-right margin-left"></text>{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}}</view>
-				<view bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
+					<view class="content">
+						<view style="margin-top: 10rpx; width: 85vw;">
+							<view class="text-content">
+								<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-check margin-right margin-left"></text>已归还</view>
+								<view wx-if="{{CardType=='AdminRecord' && BackStatus!='1'}}"><text class="cuIcon-close margin-right margin-left"></text>未归还</view>
+								<view><text class="cuIcon-time margin-right margin-left"></text>{{StartDate}} {{StartTime}} ~ {{EndDate}} {{EndTime}}</view>
+								<view><text class="cuIcon-friend margin-right margin-left"></text>{{BorrowManInfo.year}}级{{BorrowManInfo.usertype}}_{{BorrowManInfo.name}}</view>
+								<view bindtap="call"><text class="cuIcon-dianhua margin-right margin-left"></text>{{BorrowManInfo.phone}}</view>
 
-				<view wx-if="{{Video_list.length!=0}}"><text class="cuIcon-list margin-right margin-left"></text>借用器材（视频团队）：</view>
-				<view wx:for="{{Video_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
-					<view><text class="margin-right margin-left"></text>{{index+1}}、 {{item.equipmentname}}</view>
-				</view>
-				<view wx-if="{{Video_list.length==0}}"><text class="cuIcon-friend margin-right margin-left"></text>无</view>
+								<view wx-if="{{Video_list.length!=0}}"><text class="cuIcon-list margin-right margin-left"></text>借用器材（视频团队）：</view>
+								<view wx:for="{{Video_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+									<view><text class="margin-right margin-left"></text>{{index+1}}、 {{item.equipmentname}}</view>
+								</view>
+								<view wx-if="{{Video_list.length==0}}"><text class="cuIcon-friend margin-right margin-left"></text>无</view>
 
-				<view wx-if="{{Photo_list.length!=0}}"><text class="cuIcon-list margin-right margin-left"></text>借用器材（摄影部）：</view>
-				<view wx:for="{{Photo_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
-					<view><text class="margin-right margin-left"></text>{{index+1}}、 {{item.equipmentname}}</view>
-				</view>
-					<view class=" margin-right margin-left" style="width:10rpx;"></view>
+								<view wx-if="{{Photo_list.length!=0}}"><text class="cuIcon-list margin-right margin-left"></text>借用器材（摄影部）：</view>
+								<view wx:for="{{Photo_list}}" wx:key="_id" wx:for-item="item" wx:for-index="index">
+									<view><text class="margin-right margin-left"></text>{{index+1}}、 {{item.equipmentname}}</view>
+								</view>
+								<view class=" margin-right margin-left" style="width:10rpx;"></view>
 
-				<view wx-if="{{CardType=='AdminRecord'}}"><text class="cuIcon-pic margin-right margin-left margin-bottom"></text>借用时图片</view>
-				<view class="cu-form-group margin-bottom-sm margin-top-sm" wx-if="{{CardType=='AdminRecord'}}">
-					<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminImages.length!=0}}">
-						<view class="bg-img" wx:for="{{AdminImages}}" wx:key="{{index}}" data-url="{{AdminImages[index]}}">
-							<image src='{{AdminImages[index]}}' mode='aspectFill' bindtap="HandleAdminImagePreview" data-index="{{index}}"></image>
+								<view wx-if="{{CardType=='AdminRecord'}}"><text class="cuIcon-pic margin-right margin-left margin-bottom"></text>借用时图片</view>
+								<view class="cu-form-group margin-bottom-sm margin-top-sm margin-right" wx-if="{{CardType=='AdminRecord'}}">
+									<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminImages.length!=0}}">
+										<view class="bg-img" wx:for="{{AdminImages}}" wx:key="{{index}}" data-url="{{AdminImages[index]}}">
+											<image src='{{AdminImages[index]}}' mode='aspectFill' bindtap="HandleAdminImagePreview" data-index="{{index}}"></image>
+										</view>
+									</view>
+									<view wx-if="{{AdminImages.length==0}}" style="margin-left:35%;">
+										暂无图片信息
+									</view>
+								</view>
+
+								<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-pic margin-right margin-left"></text>归还时图片</view>
+								<view class="cu-form-group margin-bottom-sm margin-top-sm margin-right" wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}">
+									<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminReturnImages.length!=0}}">
+										<view class="bg-img" wx:for="{{AdminReturnImages}}" wx:key="{{index}}" data-url="{{AdminReturnImages[index]}}">
+											<image src='{{AdminReturnImages[index]}}' mode='aspectFill' bindtap="HandleAdminReturnImagePreview" data-index="{{index}}"></image>
+										</view>
+									</view>
+									<view wx-if="{{AdminReturnImages.length==0}}" style="margin-left:35%;">
+										暂无图片信息
+									</view>
+								</view>
+
+							</view>
+							<view class="bg-white margin-bottom margin-right" style="margin-left:400rpx;" bindtap="ReturnRecord2" wx-if="{{CardType=='MyRecord'}}">
+								<button class="bt cu-btn line-orange">
+									<text class="cuIcon-upload"></text>一键归还</button>
+							</view>
+							<view class="bg-white margin-bottom margin-right" style="margin-left:400rpx;" bindtap="ForceReturnRecord" wx-if="{{CardType=='AdminRecord'&&BackStatus==0}}">
+								<button class="bt cu-btn line-orange">
+									<text class="cuIcon-upload"></text>强制归还</button>
+							</view>
+							<view class="bg-white margin-bottom margin-right" style="margin-left:350rpx;" bindtap="SubscribeRecord" wx-if="{{CardType=='AllRecord'}}">
+								<button class="bt cu-btn line-orange">
+									<text class="cuIcon-upload"></text>订阅归还提醒</button>
+							</view>
+
 						</view>
 					</view>
-						<view wx-if="{{AdminImages.length==0}}" style="margin-left:35%;">
-							暂无图片信息
-						</view>
 				</view>
-				
-				<view wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}"><text class="cuIcon-pic margin-right margin-left"></text>归还时图片</view>
-				<view class="cu-form-group margin-bottom-sm margin-top-sm" wx-if="{{CardType=='AdminRecord' && BackStatus=='1'}}">
-					<view class="grid col-4 grid-square flex-sub" wx-if="{{AdminReturnImages.length!=0}}">
-						<view class="bg-img" wx:for="{{AdminReturnImages}}" wx:key="{{index}}" data-url="{{AdminReturnImages[index]}}" >
-							<image src='{{AdminReturnImages[index]}}' mode='aspectFill' bindtap="HandleAdminReturnImagePreview" data-index="{{index}}"></image>
-						</view>
-					</view>
-						<view wx-if="{{AdminReturnImages.length==0}}" style="margin-left:35%;">
-							暂无图片信息
-						</view>
-				</view>
-
 			</view>
-			<view class="bg-white margin-bottom" style="margin-left:430rpx;" bindtap="ReturnRecord2" wx-if="{{CardType=='MyRecord'}}">
-				<button class="bt cu-btn line-orange">
-					<text class="cuIcon-upload"></text>一键归还</button>
-			</view>
-			<view class="bg-white margin-bottom" style="margin-left:430rpx;" bindtap="ForceReturnRecord" wx-if="{{CardType=='AdminRecord'&&BackStatus==0}}">
-				<button class="bt cu-btn line-orange">
-					<text class="cuIcon-upload"></text>强制归还</button>
-			</view>
-			<view class="bg-white margin-bottom" style="margin-left:380rpx;" bindtap="SubscribeRecord" wx-if="{{CardType=='AllRecord'}}">
-				<button class="bt cu-btn line-orange">
-					<text class="cuIcon-upload"></text>订阅归还提醒</button>
-			</view>
-
 		</view>
 	</view>
-
 </view>
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
