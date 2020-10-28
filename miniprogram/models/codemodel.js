@@ -10,17 +10,7 @@ const TypeForm = {
   'PhotographyAdminPassword': 'abd27dd45f2a14b6000d2fd238047adb'
 }
 class CodeModel extends HTTP {
-  async GetCode(type) {
-    console.log(type)
-    const temp = await this.request({
-      name: "GetCode",
-      data: {
-        type: type
-      }
-    })
-    return md5.hex_md5(temp.result.data[0].code)
-  }
-
+  
   async ModifyCode(type,code) {
     console.log(type)
     return await this.request({
@@ -30,6 +20,17 @@ class CodeModel extends HTTP {
         code:code
       }
     })
+  }
+
+  async GetCode(type) {
+    console.log(type)
+    const temp = await this.request({
+      name: "GetCode",
+      data: {
+        type: type
+      }
+    })
+    return md5.hex_md5(temp.result.data[0].code)
   }
 
   async SendError(name,phone,usertype,openid) {

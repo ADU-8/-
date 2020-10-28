@@ -263,9 +263,7 @@ Page({
             //第二层等待Promise，获得所有图片上传的结果及url
             for (var i = 0; i < temp.length; i++) {
               console.log(i, res[i])
-              if (res[i].statusCode == 200) { //成功
-                imgurl.push(res[i].fileID)
-              }
+              imgurl.push(res[i].fileID)
             }
             console.log("inner")
             //增加借用记录
@@ -501,7 +499,7 @@ Page({
         that.setData({
           Images: images
         })
-        console.log("image2", that.data.images)
+        console.log("image2", that.data.Images)
       },
       fail: e => {
         console.error(e)

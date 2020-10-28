@@ -129,7 +129,7 @@ Page({
       var during2 = that.calculatetime(lasttipdate,lasttiptime,nowdate,nowtime)
       console.log(during1)
       console.log(during2)
-      if(during1>12 && during2>12){
+      if(during1>4 && during2>4){
         var Equip = ""
         if(item.VideoChoosed_list.length!=0){
           Equip = "‘" + item.VideoChoosed_list[0].equipmentname.substr(0,8) + "…’"
